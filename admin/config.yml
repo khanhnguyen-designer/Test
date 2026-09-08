@@ -1,0 +1,115 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "global"
+    label: "Header & Footer (dùng chung mọi trang)"
+    files:
+      - file: "content/global.json"
+        label: "Header & Footer"
+        name: "global"
+        fields:
+          - label: "Header"
+            name: "header"
+            widget: "object"
+            fields:
+              - { label: "Logo", name: "logo", widget: "image" }
+              - label: "Menu điều hướng"
+                name: "navLinks"
+                widget: "list"
+                fields:
+                  - { label: "Khoá (key, không dấu, không trùng)", name: "key", widget: "string" }
+                  - { label: "Tên hiển thị", name: "label", widget: "string" }
+                  - { label: "Đường dẫn", name: "href", widget: "string" }
+              - { label: "Text nút", name: "ctaText", widget: "string" }
+              - { label: "Link nút", name: "ctaLink", widget: "string" }
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Tiêu đề CTA (xuống dòng bằng phím Enter)", name: "heading", widget: "text" }
+              - { label: "Text nút CTA", name: "ctaText", widget: "string" }
+              - { label: "Link nút CTA", name: "ctaLink", widget: "string" }
+              - { label: "Nhãn hỗ trợ", name: "supportLabel", widget: "string" }
+              - { label: "Giá trị hỗ trợ", name: "supportValue", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - label: "Mạng xã hội"
+                name: "socialLinks"
+                widget: "list"
+                fields:
+                  - { label: "Tên", name: "label", widget: "string" }
+                  - { label: "Link", name: "url", widget: "string" }
+              - { label: "Tên công ty", name: "companyName", widget: "string" }
+              - { label: "Địa chỉ", name: "address", widget: "text" }
+              - { label: "Mã số thuế", name: "taxId", widget: "string" }
+              - { label: "Dòng chú thích nhỏ cuối trang", name: "fineprint", widget: "text" }
+              - { label: "Copyright", name: "copyright", widget: "string" }
+              - { label: "Nhãn link điều khoản", name: "termsLabel", widget: "string" }
+              - { label: "Link điều khoản", name: "termsLink", widget: "string" }
+
+  - name: "about"
+    label: "Trang Về chúng tôi"
+    files:
+      - file: "content/about.json"
+        label: "Về chúng tôi"
+        name: "about"
+        fields:
+          - label: "Hero (đầu trang)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Tiêu đề", name: "title", widget: "string" }
+              - { label: "Mô tả", name: "description", widget: "text" }
+              - { label: "Ảnh", name: "image", widget: "image" }
+              - { label: "Alt text ảnh (mô tả ảnh cho người khiếm thị/SEO)", name: "imageAlt", widget: "string" }
+          - label: "Về Mirae Asset"
+            name: "miraeAsset"
+            widget: "object"
+            fields:
+              - { label: "Tiêu đề", name: "title", widget: "string" }
+              - label: "Số liệu (số sẽ tự đếm chạy nếu là số nguyên, vd 2011)"
+                name: "metrics"
+                widget: "list"
+                fields:
+                  - { label: "Số / chữ", name: "number", widget: "string" }
+                  - { label: "Nhãn", name: "label", widget: "string" }
+              - { label: "Mô tả", name: "description", widget: "text" }
+          - label: "Giá trị mang lại"
+            name: "values"
+            widget: "object"
+            fields:
+              - { label: "Tiêu đề", name: "title", widget: "string" }
+              - label: "Danh sách giá trị"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "image" }
+                  - { label: "Tiêu đề", name: "title", widget: "string" }
+                  - { label: "Mô tả", name: "description", widget: "text" }
+          - label: "Giải thưởng"
+            name: "awards"
+            widget: "object"
+            fields:
+              - { label: "Tiêu đề", name: "title", widget: "string" }
+              - label: "Danh sách giải thưởng (thêm/bớt tuỳ ý, carousel tự điều chỉnh)"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Năm", name: "year", widget: "string" }
+                  - { label: "Ảnh nền", name: "image", widget: "image" }
+                  - { label: "Mô tả (xuống dòng bằng phím Enter)", name: "description", widget: "text" }
+          - label: "Disclaimer (cuối trang)"
+            name: "disclaimer"
+            widget: "object"
+            fields:
+              - { label: "Nội dung", name: "text", widget: "text" }
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "Tên", name: "label", widget: "string" }
+                  - { label: "Link", name: "url", widget: "string" }

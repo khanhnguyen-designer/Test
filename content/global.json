@@ -1,0 +1,34 @@
+{
+  "header": {
+    "logo": "assets/img/logo-header.svg",
+    "navLinks": [
+      { "key": "home", "label": "Trang chủ", "href": "index.html" },
+      { "key": "about", "label": "Về chúng tôi", "href": "about.html" },
+      { "key": "news", "label": "Tin tức", "href": "#" },
+      { "key": "faq", "label": "Câu hỏi thường gặp", "href": "#" },
+      { "key": "contact", "label": "Liên hệ", "href": "#" }
+    ],
+    "ctaText": "Đăng ký",
+    "ctaLink": "#"
+  },
+  "footer": {
+    "heading": "Vay khoản lớn\nLãi thật nhỏ",
+    "ctaText": "Đăng ký ngay",
+    "ctaLink": "#",
+    "supportLabel": "Hỗ trợ trực tuyến",
+    "supportValue": "Zalo OA: EVO Vietnam",
+    "email": "hotro@evomoney.vn",
+    "socialLinks": [
+      { "label": "Facebook", "url": "#" },
+      { "label": "Youtube", "url": "#" },
+      { "label": "Linkedin", "url": "#" }
+    ],
+    "companyName": "CÔNG TY CỔ PHẦN TRUSTING SOCIAL",
+    "address": "Tầng 8 Toà nhà Havana, 132 Hàm Nghi, Phường Bến Thành, thành phố Hồ Chí Minh, Việt Nam",
+    "taxId": "MST: 0106957913",
+    "fineprint": "EVO Money là nền tảng tài chính minh bạch cho Khách hàng cá nhân do Trusting Social phát triển và sở hữu. Các khoản vay tiền mặt trên nền tảng EVO Money được cung cấp bởi Công ty Tài chính TNHH MTV Mirae Asset (Việt Nam).",
+    "copyright": "© 2026 EVO Money. All rights reserved",
+    "termsLabel": "Điều Khoản và Điều Kiện",
+    "termsLink": "#"
+  }
+}

@@ -1,0 +1,523 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --color-bg: #ffffff;
+  --color-title: #1d211c;
+  --color-body: #60655f;
+  --color-label-2: #b9bcb8;
+  --color-primary: #059937;
+  --color-primary-light: #52be64;
+  --color-border: #e7e9e7;
+  --color-line: #d7dad7;
+  --color-card-bg: #eff1ef;
+  --color-footer-bg: #1d211c;
+  --color-footer-border: #444c44;
+  --color-white: #fcfdfc;
+
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --fs-6xlg: clamp(2rem, 1.2rem + 3.5vw, 3.5625rem);   /* 32 -> 57 */
+  --fs-5xlg: clamp(1.75rem, 1.1rem + 2.8vw, 3rem);      /* 28 -> 48 */
+  --fs-4xlg: clamp(1.5rem, 1rem + 2.2vw, 2.5rem);       /* 24 -> 40 */
+  --fs-3xlg: clamp(1.375rem, 1rem + 1.6vw, 2.0625rem);  /* 22 -> 33 */
+  --fs-xlg: clamp(1.125rem, 1rem + 0.5vw, 1.4375rem);   /* 18 -> 23 */
+  --fs-lg: clamp(1.0625rem, 0.95rem + 0.5vw, 1.1875rem);/* 17 -> 19 */
+  --fs-base: 1rem;                                      /* 16 */
+  --fs-sm: 0.8125rem;                                   /* 13 */
+
+  --container-max: 1440px;
+  --section-pad-x: clamp(20px, 5vw, 64px);
+  --radius-lg: 22px;
+
+  --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1); /* ease-in-out, used for hover micro-interactions */
+
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-title);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--section-pad-x);
+}
+
+/* Narrower content container (hero text, Mirae Asset section, values, awards, disclaimer) — distinct from full-bleed elements like the hero image and footer.
+   1092px = the largest horizontal measurement found across these rows in the Figma file (hero 1090 / info row 1091 / values row 1092 / awards 1091) — using the max keeps every row able to reach its own exact spec width without being squeezed.
+   Uses width:min() instead of max-width+padding so the full width is usable as content width on desktop;
+   padding only kicks in as edge-safety margin once the viewport gets too narrow to fit it. */
+.content-container {
+  width: min(1092px, 100% - 2 * var(--section-pad-x));
+  margin: 0 auto;
+}
+
+.section { padding: clamp(56px, 9vw, 124px) 0; }
+/* Hero: 144px from header, no bottom padding — the gap to the next section comes from that section's own top padding */
+.hero { padding: clamp(56px, 11vw, 144px) 0 0; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 24px;
+  border-radius: 8px;
+  font-size: var(--fs-base);
+  font-weight: 500;
+  line-height: 1.375; /* 22px at the 16px reference size — makes the header button hit exactly 40px tall */
+  white-space: nowrap;
+  transition: transform .3s var(--ease-smooth), box-shadow .3s var(--ease-smooth), filter .3s var(--ease-smooth);
+}
+.btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.btn-dark { background: var(--color-title); color: var(--color-white); }
+.btn-gradient {
+  position: relative;
+  background: linear-gradient(0deg, var(--color-primary) 75%, var(--color-primary-light));
+  color: var(--color-white);
+  height: 56px;
+  padding: 4px 24px;
+  border-radius: 12px;
+  font-size: 19px;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.25);
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px var(--section-pad-x);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+.logo { flex-shrink: 0; }
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 32px);
+  font-size: var(--fs-base);
+  white-space: nowrap;
+}
+.nav a { position: relative; padding: 4px 0; }
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s var(--ease-smooth);
+}
+.nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.header-cta { flex-shrink: 0; }
+
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+.burger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-title);
+  transition: transform .35s var(--ease-smooth), opacity .35s var(--ease-smooth);
+}
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Hero ---------- */
+.hero-top {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+.hero-title {
+  flex: 1 1 320px;
+  margin: 0;
+  font-size: var(--fs-6xlg);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -1px;
+}
+.hero-desc {
+  flex: 1 1 320px;
+  margin: 0;
+  font-size: var(--fs-xlg);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.5px;
+}
+.hero-image-wrap {
+  width: 100%;
+  padding: 0 var(--section-pad-x);
+}
+.hero-image {
+  width: 100%;
+  height: clamp(220px, 45vw, 656px);
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+/* ---------- Shared row block (label + content) ---------- */
+.row-block {
+  display: flex;
+  gap: clamp(24px, 4vw, 26px);
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-bottom: clamp(56px, 9vw, 124px);
+}
+.block-title {
+  flex: 1 1 280px;
+  max-width: 532px;
+  margin: 0;
+  font-size: var(--fs-5xlg);
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+.block-content {
+  flex: 1 1 400px;
+  max-width: 533px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 56px);
+  min-width: 0;
+}
+.block-desc {
+  margin: 0;
+  max-width: 533px;
+  font-size: var(--fs-lg);
+  line-height: 1.4;
+  color: var(--color-body);
+}
+
+/* ---------- Metrics ---------- */
+.metrics {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.metric { flex: 1 1 140px; min-width: 0; }
+.metric-num {
+  margin: 0 0 8px;
+  font-size: var(--fs-3xlg);
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+.metric-label {
+  margin: 0;
+  font-size: var(--fs-base);
+  color: var(--color-body);
+}
+
+/* ---------- Values card ---------- */
+.values-card {
+  flex: 1 1 400px;
+  max-width: 534px;
+  background: var(--color-card-bg);
+  border-radius: 20px;
+  padding: 8px 24px;
+}
+.fact-row {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+.fact-row-last { border-bottom: none; }
+.icon-wrap {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fact-text { min-width: 0; }
+.fact-title { margin: 0 0 8px; font-size: var(--fs-xlg); font-weight: 500; letter-spacing: -0.5px; }
+.fact-desc { margin: 0; font-size: var(--fs-base); color: var(--color-body); line-height: 1.4; }
+
+/* ---------- Awards ---------- */
+.awards-block { flex-direction: column; padding-bottom: clamp(56px, 9vw, 124px); }
+.awards-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.block-title-inline { max-width: none; font-size: var(--fs-4xlg); }
+.awards-nav { display: flex; gap: 8px; flex-shrink: 0; }
+.circle-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle-btn:hover { background: var(--color-card-bg); }
+
+.awards-track-wrap { position: relative; }
+.awards-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  cursor: grab;
+}
+.awards-track:active { cursor: grabbing; }
+.awards-track::-webkit-scrollbar { display: none; }
+.award-card {
+  flex: 0 0 330px;
+  height: 347px;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-size: cover;
+  background-position: center;
+  user-select: none;
+}
+.award-card img { pointer-events: none; }
+.award-year { margin: 0; font-size: var(--fs-6xlg); font-weight: 600; letter-spacing: -1px; }
+.award-desc { margin: 0; font-size: var(--fs-lg); font-weight: 500; line-height: 1.35; }
+
+/* Fade mask over the edges of the track — softens the "cut off" look of a partially visible card, blending it into the section's white background */
+.awards-fade {
+  position: absolute;
+  top: 0;
+  width: 96px;
+  height: 347px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity .3s var(--ease-smooth);
+}
+.awards-fade-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+.awards-fade-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  opacity: 1; /* visible by default — on load, scrolled to the start, there's always more content to the right */
+}
+.awards-fade.is-visible { opacity: 1; }
+.awards-fade-right.is-hidden { opacity: 0; }
+
+/* Custom draggable scrollbar — replaces the native (hidden) one so the drag handle matches the design */
+.awards-scrollbar {
+  position: relative;
+  margin-top: 16px;
+  width: 100%; /* spans the full track width — a functional scrollbar should track the whole scrollable area, not the old decorative asset's fixed 357px */
+  height: 8px; /* matches the original divider-line.svg: stroke-width="8" */
+  background: none; /* the design only shows one bar (the thumb below) — no visible track underneath */
+  border-radius: 999px;
+  cursor: pointer;
+}
+.awards-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--color-border); /* the single color from the original divider-line.svg (#E7E9E7) */
+  border-radius: 999px;
+  cursor: grab;
+}
+.awards-scrollbar-thumb.is-dragging { cursor: grabbing; }
+
+/* ---------- Disclaimer ---------- */
+.disclaimer { text-align: center; }
+.disclaimer-text {
+  margin: 0 auto 24px;
+  max-width: 642px;
+  font-size: var(--fs-sm);
+  color: var(--color-body);
+  line-height: 1.4;
+}
+.disclaimer-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-primary);
+}
+.disclaimer-links a { text-decoration: underline; }
+
+/* ---------- Footer ---------- */
+.footer {
+  background: var(--color-footer-bg);
+  color: var(--color-white);
+  padding: clamp(56px, 9vw, 124px) var(--section-pad-x) 32px; /* horizontal padding lives here (matches .header exactly, no max-width) — children inherit the inset naturally */
+  overflow: hidden;
+}
+.footer-row {
+  display: flex;
+  gap: 20px;
+  height: 499px; /* fixed per design at the 1440 reference width — see skills/spacing-reference.md */
+  flex-wrap: wrap;
+  margin-bottom: 64px; /* margin, not padding — padding would eat into the fixed height (border-box) */
+}
+.footer-cta {
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+.footer-cta-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+}
+.footer-heading {
+  margin: 0;
+  font-size: var(--fs-5xlg);
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.1875; /* 57px at the 48px reference size */
+}
+.footer-logo-deco {
+  position: absolute;
+  left: -64px;
+  bottom: 0;
+  width: 60%;
+  min-width: 300px;
+  max-width: 535px;
+  aspect-ratio: 1920 / 1046; /* matches the Lottie composition's own canvas size */
+  pointer-events: none;
+}
+.footer-logo-deco svg { display: block; }
+.footer-content {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* height comes from footer-row's stretch, not a fixed gap — matches the design's fixed-height + space-between layout */
+  min-width: 0;
+}
+.footer-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.footer-info-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.footer-info-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+.footer-info { min-width: 0; }
+.footer-info-group > .footer-info { flex: 1 1 200px; } /* only the row-level columns (e.g. Social) share width this way — nested label/value blocks must NOT grow inside their column parent */
+.footer-label { margin: 0 0 8px; font-size: var(--fs-sm); line-height: 1.3846; color: var(--color-label-2); }
+.footer-value { margin: 0; font-size: var(--fs-lg); font-weight: 500; line-height: 1.368; }
+.footer-value + .footer-value { margin-top: 8px; } /* consecutive value lines (Liên hệ block) — 8px between them, no trailing margin after the last one */
+.social-links { display: flex; flex-direction: column; gap: 8px; }
+.social-link { display: inline-flex; align-items: center; gap: 4px; font-size: var(--fs-lg); font-weight: 500; width: fit-content; }
+.footer-fineprint {
+  margin: 0;
+  max-width: 646px;
+  font-size: var(--fs-base);
+  color: var(--color-label-2);
+  line-height: 1.4;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 32px; /* horizontal inset comes from .footer's own padding — border-top naturally spans only the inset content width, matching Figma (not edge-to-edge) */
+  border-top: 1px solid var(--color-footer-border);
+  font-size: var(--fs-base);
+  color: var(--color-label-2);
+}
+
+/* ---------- Reveal animation base state ---------- */
+[data-reveal] { opacity: 0; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .nav {
+    position: fixed;
+    inset: 0 0 0 auto;
+    top: 65px;
+    height: calc(100vh - 65px);
+    width: min(320px, 80vw);
+    background: var(--color-white);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 24px;
+    border-left: 1px solid var(--color-border);
+    transform: translateX(100%);
+    transition: transform .4s var(--ease-smooth);
+  }
+  .nav.is-open { transform: translateX(0); }
+  .nav a { padding: 10px 0; font-size: 18px; width: 100%; }
+  .header-cta { display: none; }
+  .burger { display: flex; }
+
+  .row-block { flex-direction: column; }
+  /* flex:1 1 280px / 400px from the desktop rule would apply to HEIGHT once the row becomes a column — reset to auto-sized, full-width blocks.
+     Scoped to .row-block's own children only — .block-title is reused by the awards heading (.block-title-inline), which stays in a row (title + arrow buttons) and must NOT be forced full-width. */
+  .row-block > .block-title, .row-block > .block-content { flex: none; width: 100%; max-width: none; }
+  .values-card { max-width: none; width: 100%; }
+  .awards-head { flex-direction: row; align-items: center; }
+  .footer-row { flex-direction: column; height: auto; margin-bottom: 48px; }
+  .footer-cta { padding-bottom: 260px; } /* room for the logo, now free-flowing instead of bottom-pinned to a fixed 499px row */
+  .footer-logo-deco { bottom: 0; }
+}
+
+@media (max-width: 560px) {
+  .metrics { flex-direction: column; gap: 20px; }
+  .metric { flex: none; } /* flex:1 1 140px from the desktop rule would apply to HEIGHT once this becomes a column */
+  .footer-logo-deco { display: none; }
+  .award-card { flex: 0 0 260px; height: 280px; }
+  .footer-bottom { flex-direction: column; }
+}
