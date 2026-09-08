@@ -497,15 +497,29 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .social-links { display: flex; flex-direction: column; gap: 8px; }
 .social-link { display: inline-flex; align-items: center; gap: 4px; font-size: var(--fs-lg); font-weight: 500; width: fit-content; }
 
-/* Social arrow icon — nudges diagonally up-right on hover and stays there (matches the icon's
-   own up-right direction) instead of swapping out for a duplicate. */
-.social-icon {
+/* Social arrow icon — same flip technique as the button text (a duplicate icon slides in as the
+   current one slides out), but along a diagonal matching the arrow's own up-right direction:
+   current icon exits up-right, duplicate enters from down-left (bottom-to-top, left-to-right). */
+.social-icon-flip {
+  position: relative;
   display: inline-block;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
   vertical-align: middle;
+}
+.social-icon {
+  display: block;
   transform: translate(0, 0);
   transition: transform .4s var(--ease-smooth);
 }
-.social-link:hover .social-icon { transform: translate(4px, -4px); }
+.social-icon-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-100%, 100%);
+}
+.social-link:hover .social-icon { transform: translate(100%, -100%); }
 .footer-fineprint {
   margin: 0;
   max-width: 646px;
