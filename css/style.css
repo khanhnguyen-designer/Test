@@ -483,6 +483,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .footer-bottom {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
@@ -491,6 +492,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: var(--fs-base);
   color: var(--color-label-2);
 }
+.footer-bottom p { margin: 0; } /* reset the browser's default <p> margin — the terms <a> next to it has none, so this was pushing copyright out of vertical alignment */
 
 /* ---------- Reveal animation base state ---------- */
 [data-reveal] { opacity: 0; }
