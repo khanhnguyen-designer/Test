@@ -592,7 +592,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
      absolute bleed-behind-the-CTA treatment into normal flow, full width, own line. */
   .footer-logo-deco {
     position: static;
-    width: 100%;
+    /* Bleed flush to the left edge only (matches the desktop bleed's direction) — extend width
+       by the section's own horizontal padding and pull the left edge out by the same amount,
+       leaving the right edge exactly where 100% width would've put it. */
+    width: calc(100% + var(--section-pad-x));
+    margin-left: calc(-1 * var(--section-pad-x));
     min-width: 0;
     max-width: none;
     margin-top: 40px;
@@ -609,6 +613,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .footer-info-group { flex-wrap: nowrap; }
   .footer-info-wrap,
   .footer-info-group > .footer-info { flex: 1 1 0; }
+
+  #footerCta { display: flex; width: 100%; }
 
   .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
   #footerTermsLink { order: -1; } /* Figma shows Terms above Copyright once stacked */
