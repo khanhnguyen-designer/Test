@@ -475,14 +475,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .footer-label { margin: 0 0 8px; font-size: var(--fs-sm); line-height: 1.3846; color: var(--color-label-2); }
 .footer-value { margin: 0; font-size: var(--fs-lg); font-weight: 500; line-height: 1.368; }
 .footer-value + .footer-value { margin-top: 8px; } /* consecutive value lines (Liên hệ block) — 8px between them, no trailing margin after the last one */
-/* Email — underline grows/retracts left-to-right on hover, same technique as .nav a::after.
-   currentColor means it's whatever color the link itself renders in (white, in the footer). */
-.footer-email-link {
+/* Email + Zalo OA — both are clickable links, underline grows/retracts left-to-right on hover,
+   same technique as .nav a::after. currentColor means it's whatever color the link itself
+   renders in (white, in the footer). */
+.footer-email-link,
+.footer-support-link {
   display: block;
   position: relative;
   width: fit-content;
 }
-.footer-email-link::after {
+.footer-email-link::after,
+.footer-support-link::after {
   content: '';
   position: absolute;
   left: 0; right: 0; bottom: -2px;
@@ -492,7 +495,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transform-origin: right;
   transition: transform .4s var(--ease-smooth);
 }
-.footer-email-link:hover::after {
+.footer-email-link:hover::after,
+.footer-support-link:hover::after {
   transform: scaleX(1);
   transform-origin: left;
 }

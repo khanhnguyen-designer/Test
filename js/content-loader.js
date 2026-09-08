@@ -68,6 +68,7 @@
       setAttr('footerCta', 'href', footer.ctaLink);
       setText('footerSupportLabel', footer.supportLabel);
       setText('footerSupportValue', footer.supportValue);
+      setAttr('footerSupportValue', 'href', footer.supportLink);
       setText('footerEmail', footer.email);
       setAttr('footerEmail', 'href', footer.email ? `mailto:${footer.email}` : null);
       renderList('footerSocialLinks', footer.socialLinks, link =>

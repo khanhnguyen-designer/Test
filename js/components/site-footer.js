@@ -22,7 +22,7 @@ class SiteFooter extends HTMLElement {
                 <div class="footer-info-wrap">
                   <div class="footer-info">
                     <p class="footer-label" id="footerSupportLabel">Hỗ trợ trực tuyến</p>
-                    <p class="footer-value" id="footerSupportValue">Zalo OA: EVO Vietnam</p>
+                    <a class="footer-value footer-support-link" id="footerSupportValue" href="#">Zalo OA: EVO Vietnam</a>
                   </div>
                   <div class="footer-info">
                     <p class="footer-label">Email</p>
