@@ -587,6 +587,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .values-card { max-width: none; width: 100%; }
   .awards-head { flex-direction: row; align-items: center; }
   .footer-row { flex-direction: column; height: auto; margin-bottom: 48px; }
+  /* .footer-content's justify-content: space-between (desktop) relies on .footer-row's fixed
+     499px height to create room between .footer-info-block and .footer-fineprint — once the
+     row is height:auto here, there's no leftover space to distribute and the gap collapses to
+     0. Give it an explicit gap instead. */
+  .footer-content { gap: 24px; }
   /* Once .footer-row stacks into a column, .footer-logo-deco (last child, after .footer-cta
      and .footer-content) reads naturally in that order — switch it out of the desktop's
      absolute bleed-behind-the-CTA treatment into normal flow, full width, own line. */
