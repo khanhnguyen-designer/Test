@@ -494,8 +494,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .footer-bottom p { margin: 0; } /* reset the browser's default <p> margin — the terms <a> next to it has none, so this was pushing copyright out of vertical alignment */
 
-/* ---------- Reveal animation base state ---------- */
-[data-reveal] { opacity: 0; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {

@@ -96,12 +96,9 @@
     if (miraeAsset) {
       setText('miraeTitle', miraeAsset.title);
       setText('miraeDesc', miraeAsset.description);
-      renderList('metricsList', miraeAsset.metrics, m => {
-        const isNumeric = /^\d+$/.test(m.number);
-        const countAttr = isNumeric ? ` data-count-to="${m.number}"` : '';
-        const displayValue = isNumeric ? '0' : m.number;
-        return `<div class="metric"><p class="metric-num"${countAttr}>${displayValue}</p><p class="metric-label">${m.label}</p></div>`;
-      });
+      renderList('metricsList', miraeAsset.metrics, m =>
+        `<div class="metric"><p class="metric-num">${m.number}</p><p class="metric-label">${m.label}</p></div>`
+      );
     }
 
     if (values) {
