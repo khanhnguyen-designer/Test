@@ -519,7 +519,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   left: 0;
   transform: translate(-100%, 100%);
 }
-.social-link:hover .social-icon { transform: translate(100%, -100%); }
+/* Two separate rules, not one shared selector — the original icon and the duplicate need
+   DIFFERENT end positions on hover (exit vs settle-into-place), and a single rule targeting
+   both via .social-icon would overwrite the duplicate's own -100%/100% base with the exact
+   same exit transform as the original, so it slides past the visible box instead of landing in it. */
+.social-link:hover .social-icon:not(.social-icon-hover) { transform: translate(100%, -100%); }
+.social-link:hover .social-icon-hover { transform: translate(0, 0); }
 .footer-fineprint {
   margin: 0;
   max-width: 646px;

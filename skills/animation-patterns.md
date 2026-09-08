@@ -201,6 +201,26 @@ function setFlipText(id, value) {
 }
 ```
 
+## ⚠️ Flip icon theo đường chéo — lỗi cascade khiến bản sao "lướt qua" chứ không dừng lại đúng chỗ
+
+Làm y hệt kỹ thuật flip-text ở trên nhưng cho 1 icon (2 bản `<img>` xếp chồng, lệch chéo thay vì lệch dọc):
+```css
+.icon { transform: translate(0,0); transition: transform .4s var(--ease-smooth); }
+.icon-hover { position: absolute; top:0; left:0; transform: translate(-100%, 100%); } /* vị trí nghỉ: lệch chéo dưới-trái, ẩn bởi overflow:hidden */
+.link:hover .icon { transform: translate(100%, -100%); } /* SAI nếu áp cho CẢ HAI icon qua chung 1 class */
+```
+Lỗi: rule hover phía trên áp `transform` cho CẢ HAI icon (dùng chung class `.icon`) — nhưng `transform` không cộng dồn giữa các rule, rule có độ đặc hiệu cao hơn (`:hover` + nhiều class) GHI ĐÈ HOÀN TOÀN giá trị `transform` gốc của icon bản sao (`translate(-100%,100%)`), khiến nó cũng nhận đúng `translate(100%,-100%)` như icon gốc — tức là bản sao cũng trượt ra ngoài theo hướng chéo đó thay vì DỪNG LẠI ở vị trí hiển thị. Hậu quả thực tế: lúc hover xong, cả 2 icon đều biến mất (chỉ thấy nó thoáng qua giữa chừng lúc đang transition, trông như "bị lộ ra ngoài vùng clip" nếu chụp màn hình đúng lúc đó).
+
+**Vì sao flip-text (dọc) ở trên không bị lỗi này**: `.flip-text-hover` dùng thuộc tính `bottom` (không phải `transform`) cho vị trí nghỉ, nên `transform` của rule hover CỘNG DỒN lên trên vị trí đã định qua `bottom` (2 thuộc tính khác nhau, không ghi đè nhau) — vô tình tránh được lỗi. Flip theo đường chéo cần CẢ 2 trục (x và y) nên không thể tách 1 trục ra dùng `bottom`/`left` như vậy, phải xử lý khác.
+
+**Cách sửa đúng**: tách riêng 2 rule hover, mỗi rule chỉ nhắm đúng 1 icon (dùng `:not()` để loại trừ), không dùng chung 1 selector cho cả hai:
+```css
+.link:hover .icon:not(.icon-hover) { transform: translate(100%, -100%); } /* icon gốc: thoát ra */
+.link:hover .icon-hover { transform: translate(0, 0); } /* icon bản sao: dừng đúng vị trí hiển thị */
+```
+
+**Cách test không bị đánh lừa bởi transition/pane ẩn**: đọc `getComputedStyle().transform` ngay sau khi toggle trạng thái hover (dù giả lập bằng class test hay `:hover` thật) có thể vẫn trả về giá trị CŨ nếu môi trường test đang throttle transition (xem [dev-testing-notes.md](dev-testing-notes.md)) — không phải do rule sai. Muốn đọc đúng giá trị ĐÍCH ngay lập tức, tắt tạm `transition: none !important` qua 1 rule test rồi mới đọc computed style, để loại hẳn yếu tố thời gian ra khỏi phép so sánh.
+
 ## Nguyên tắc chung cho hover/transition CSS
 
 - Chỉ nên animate `transform` + `opacity` (+ `background-color`/`color` nếu cần, rẻ) — tránh `width`/`height`/`top`/`left` gây reflow.
