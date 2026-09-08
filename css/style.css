@@ -589,7 +589,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 @media (max-width: 560px) {
   .metrics { flex-direction: column; gap: 20px; }
   .metric { flex: none; } /* flex:1 1 140px from the desktop rule would apply to HEIGHT once this becomes a column */
-  .footer-logo-deco { display: none; }
   .award-card { flex: 0 0 260px; height: 280px; }
   .footer-bottom { flex-direction: column; }
 }
