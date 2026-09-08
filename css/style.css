@@ -218,6 +218,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   letter-spacing: -1px;
   line-height: 1.2;
 }
+/* Each .blur-line must stack like the original wrapped lines did — GSAP sets opacity/filter/y
+   on these via js/main.js's splitIntoLines(), scroll-triggered once per heading. */
+.blur-line { display: block; will-change: filter; }
 .block-content {
   flex: 1 1 400px;
   max-width: 533px;

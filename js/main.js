@@ -135,6 +135,65 @@ function initSiteAnimations() {
     gsap.to(track, { scrollLeft: ratio * awardsMaxScroll(), duration: 0.5, ease: 'power3.out' });
   });
 
+  /* ---------- Section headings: blur-in reveal, staggered by LINE, once per heading on scroll ----------
+     Splits the heading's rendered text into one wrapper span per VISUAL line (grouped by matching
+     offsetTop after wrapping each word) rather than guessing line breaks — works regardless of how
+     the heading actually wraps at the current viewport width. */
+  function splitIntoLines(el) {
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words.map(w => `<span class="line-word">${w}</span>`).join(' ');
+    const wordEls = [...el.querySelectorAll('.line-word')];
+
+    const lines = [];
+    let currentTop = null;
+    let currentWords = [];
+    wordEls.forEach(w => {
+      const top = w.offsetTop;
+      if (currentTop === null || Math.abs(top - currentTop) < 2) {
+        currentWords.push(w.textContent);
+      } else {
+        lines.push(currentWords);
+        currentWords = [w.textContent];
+      }
+      currentTop = top;
+    });
+    if (currentWords.length) lines.push(currentWords);
+
+    el.innerHTML = lines
+      .map(lineWords => `<span class="blur-line">${lineWords.join(' ')}</span>`)
+      .join('');
+    return el.querySelectorAll('.blur-line');
+  }
+
+  /* Must wait for the Inter webfont to finish loading before measuring offsetTop — splitting
+     against fallback-font metrics grouped words onto the wrong lines (each word landed in its
+     own group), and since .blur-line is display:block that wrong split became a permanent
+     visual line break regardless of how the text later reflowed. */
+  const fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  fontsReady.then(() => {
+    ['miraeTitle', 'valuesTitle', 'awardsTitle'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const lines = splitIntoLines(el);
+      gsap.set(lines, { opacity: 0, filter: 'blur(16px)', y: 14 });
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          gsap.to(lines, {
+            opacity: 1,
+            filter: 'blur(0px)',
+            y: 0,
+            duration: 0.9,
+            ease: 'power2.inOut',
+            stagger: 0.15,
+          });
+        },
+      });
+    });
+  });
+
   /* ---------- Footer logo Lottie animation — replays every time the footer scrolls into view ---------- */
   const footerLogoEl = document.getElementById('footerLogoLottie');
   if (footerLogoEl && window.lottie) {
