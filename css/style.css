@@ -586,6 +586,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .row-block > .block-title, .row-block > .block-content { flex: none; width: 100%; max-width: none; }
   .block-desc { max-width: none; } /* its own 533px cap (matching the desktop content column) survives .block-content's reset above since it's a grandchild, not a direct child — left the paragraph capped even after the row went full-width */
   .values-card { max-width: none; width: 100%; }
+  .footer-fineprint { max-width: none; } /* same leftover-cap bug as .block-desc: 646px matched .footer-content's desktop column width, capping it short once .footer-row stacks and .footer-content goes full-width */
   .awards-head { flex-direction: row; align-items: center; }
   .footer-row { flex-direction: column; height: auto; margin-bottom: 48px; }
   /* .footer-content's justify-content: space-between (desktop) relies on .footer-row's fixed
