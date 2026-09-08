@@ -26,16 +26,16 @@ class SiteFooter extends HTMLElement {
                   </div>
                   <div class="footer-info">
                     <p class="footer-label">Email</p>
-                    <p class="footer-value" id="footerEmail">hotro@evomoney.vn</p>
+                    <a class="footer-value footer-email-link" id="footerEmail" href="mailto:hotro@evomoney.vn">hotro@evomoney.vn</a>
                   </div>
                 </div>
 
                 <div class="footer-info">
                   <p class="footer-label">Social</p>
                   <div class="social-links" id="footerSocialLinks">
-                    <a href="#" class="social-link">Facebook <img src="assets/img/arrow-outward.svg" alt="" width="20" height="20"></a>
-                    <a href="#" class="social-link">Youtube <img src="assets/img/arrow-outward.svg" alt="" width="20" height="20"></a>
-                    <a href="#" class="social-link">Linkedin <img src="assets/img/arrow-outward.svg" alt="" width="20" height="20"></a>
+                    <a href="#" class="social-link">Facebook <span class="social-icon-flip"><img class="social-icon" src="assets/img/arrow-outward.svg" alt="" width="20" height="20"><img class="social-icon social-icon-hover" src="assets/img/arrow-outward.svg" alt="" width="20" height="20"></span></a>
+                    <a href="#" class="social-link">Youtube <span class="social-icon-flip"><img class="social-icon" src="assets/img/arrow-outward.svg" alt="" width="20" height="20"><img class="social-icon social-icon-hover" src="assets/img/arrow-outward.svg" alt="" width="20" height="20"></span></a>
+                    <a href="#" class="social-link">Linkedin <span class="social-icon-flip"><img class="social-icon" src="assets/img/arrow-outward.svg" alt="" width="20" height="20"><img class="social-icon social-icon-hover" src="assets/img/arrow-outward.svg" alt="" width="20" height="20"></span></a>
                   </div>
                 </div>
               </div>

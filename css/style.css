@@ -472,8 +472,54 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .footer-label { margin: 0 0 8px; font-size: var(--fs-sm); line-height: 1.3846; color: var(--color-label-2); }
 .footer-value { margin: 0; font-size: var(--fs-lg); font-weight: 500; line-height: 1.368; }
 .footer-value + .footer-value { margin-top: 8px; } /* consecutive value lines (Liên hệ block) — 8px between them, no trailing margin after the last one */
+/* Email — underline grows/retracts left-to-right on hover, same technique as .nav a::after.
+   currentColor means it's whatever color the link itself renders in (white, in the footer). */
+.footer-email-link {
+  display: block;
+  position: relative;
+  width: fit-content;
+}
+.footer-email-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s var(--ease-smooth);
+}
+.footer-email-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .social-links { display: flex; flex-direction: column; gap: 8px; }
 .social-link { display: inline-flex; align-items: center; gap: 4px; font-size: var(--fs-lg); font-weight: 500; width: fit-content; }
+
+/* Social arrow icon — same flip technique as the button text (a duplicate icon slides in as the
+   current one slides out), but along a diagonal matching the arrow's own up-right direction:
+   current icon exits up-right, duplicate enters from down-left (bottom-to-top, left-to-right). */
+.social-icon-flip {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.social-icon {
+  display: block;
+  transform: translate(0, 0);
+  transition: transform .4s var(--ease-smooth);
+}
+.social-icon-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-100%, 100%);
+}
+.social-link:hover .social-icon { transform: translate(100%, -100%); }
 .footer-fineprint {
   margin: 0;
   max-width: 646px;

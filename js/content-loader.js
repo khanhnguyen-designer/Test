@@ -69,9 +69,13 @@
       setText('footerSupportLabel', footer.supportLabel);
       setText('footerSupportValue', footer.supportValue);
       setText('footerEmail', footer.email);
-      renderList('footerSocialLinks', footer.socialLinks, link =>
-        `<a href="${link.url}" class="social-link">${link.label} <img src="assets/img/arrow-outward.svg" alt="" width="20" height="20"></a>`
-      );
+      setAttr('footerEmail', 'href', footer.email ? `mailto:${footer.email}` : null);
+      renderList('footerSocialLinks', footer.socialLinks, link => `
+        <a href="${link.url}" class="social-link">${link.label} <span class="social-icon-flip">
+          <img class="social-icon" src="assets/img/arrow-outward.svg" alt="" width="20" height="20">
+          <img class="social-icon social-icon-hover" src="assets/img/arrow-outward.svg" alt="" width="20" height="20">
+        </span></a>
+      `);
       setText('footerCompanyName', footer.companyName);
       setText('footerAddress', footer.address);
       setText('footerTaxId', footer.taxId);
