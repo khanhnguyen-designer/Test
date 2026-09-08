@@ -79,7 +79,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-weight: 500;
   line-height: 1.375; /* 22px at the 16px reference size — makes the header button hit exactly 40px tall */
   white-space: nowrap;
-  transition: transform .3s var(--ease-smooth), box-shadow .3s var(--ease-smooth), filter .3s var(--ease-smooth);
 }
 
 /* Flip-up text on hover — slide reveal (not a 3D rotate): current text slides up out of view
@@ -97,7 +96,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   width: 100%;
 }
 .btn:hover .flip-text { transform: translateY(-100%); }
-.btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
 .btn-dark { background: var(--color-title); color: var(--color-white); }
 .btn-gradient {
   position: relative;
