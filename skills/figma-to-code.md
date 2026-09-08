@@ -78,6 +78,14 @@ Cách đúng: dùng `margin-bottom` cho khoảng cách tới phần tử SAU, gi
 .footer-value + .footer-value { margin-top: 8px; } /* chỉ tạo khoảng cách GIỮA các phần tử, không có margin thừa sau phần tử cuối */
 ```
 
+## ⚠️ Header sticky/overlay: padding-top của section đầu tiên KHÔNG đo từ đáy header
+
+Trong Figma, Header thường là 1 frame RIÊNG đè lên (overlay) phần đầu của section bên dưới nó — cả 2 cùng bắt đầu ở toạ độ y giống nhau (vd cả Header và Section hero đều `y=0`), vì trên web thật Header là `position: sticky`/`fixed`, hiển thị NỔI lên trên nội dung cuộn qua, không phải 1 khối chiếm chỗ nối tiếp trong luồng tài liệu ở Figma.
+
+Hệ quả: nếu thấy heading đầu tiên nằm ở toạ độ tuyệt đối `y=144` (tính từ đỉnh trang) và Header cao 80px, thì **khoảng cách hiển thị thực tế từ đáy header tới heading phải là `144 − 80 = 64px`**, KHÔNG PHẢI 144px — vì 144 đã tính luôn phần bị header che ở trên. Nếu code web dùng `header { position: sticky }` (chiếm chỗ trong luồng, đẩy nội dung xuống — khác với `fixed` không chiếm chỗ), phải trừ chiều cao header ra khỏi con số đọc được trong Figma trước khi đặt `padding-top` cho section kế tiếp, không dùng thẳng số tuyệt đối.
+
+**Cách tránh lặp lại lỗi này**: khi đo padding-top của section ĐẦU TIÊN sau header, luôn kiểm tra xem node Header trong Figma có toạ độ `y` TRÙNG với section đó không (overlay) hay nằm PHÍA TRÊN, tách biệt (nối tiếp trong luồng) — 2 trường hợp cho công thức tính khác nhau hoàn toàn.
+
 ## Nguyên tắc: luôn lấy số đo trực tiếp từ node Figma, không áng chừng
 
 Khi build lại thấy sai lệch, đọc lại đúng node đang nghi ngờ để lấy số chính xác (width, padding-top, gap...) rồi đối chiếu bằng `getBoundingClientRect()`/`getComputedStyle()` ở trình duyệt thật — không suy đoán hoặc làm tròn số nếu chưa xác nhận lại nguồn. Nếu công cụ hỗ trợ đọc metadata dạng tọa độ tuyệt đối (x/y/width/height), ưu tiên dùng cách đó thay vì chỉ đọc class/token — tọa độ tuyệt đối lộ ra chênh lệch chính xác hơn nhiều.

@@ -65,7 +65,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .section { padding: clamp(56px, 9vw, 124px) 0; }
 /* Hero: 144px from header, no bottom padding — the gap to the next section comes from that section's own top padding */
-.hero { padding: clamp(56px, 11vw, 144px) 0 0; }
+.hero { padding: clamp(32px, 5vw, 64px) 0 0; } /* 64px = 144px (heading's absolute y in Figma) minus the 80px header height it overlaps, not 144px itself — header is sticky/in-flow so it already pushes content down by its own height */
 
 /* ---------- Buttons ---------- */
 .btn {
