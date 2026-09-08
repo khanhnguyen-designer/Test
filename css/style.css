@@ -584,6 +584,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   /* flex:1 1 280px / 400px from the desktop rule would apply to HEIGHT once the row becomes a column — reset to auto-sized, full-width blocks.
      Scoped to .row-block's own children only — .block-title is reused by the awards heading (.block-title-inline), which stays in a row (title + arrow buttons) and must NOT be forced full-width. */
   .row-block > .block-title, .row-block > .block-content { flex: none; width: 100%; max-width: none; }
+  .block-desc { max-width: none; } /* its own 533px cap (matching the desktop content column) survives .block-content's reset above since it's a grandchild, not a direct child — left the paragraph capped even after the row went full-width */
   .values-card { max-width: none; width: 100%; }
   .awards-head { flex-direction: row; align-items: center; }
   .footer-row { flex-direction: column; height: auto; margin-bottom: 48px; }
