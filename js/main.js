@@ -20,12 +20,53 @@ function initSiteAnimations() {
     });
   });
 
+  /* ---------- Text "line-split" helper: wraps each word, groups by measured offsetTop into
+     per-line spans (adapts to actual wrapping at any width, instead of guessing line breaks).
+     Shared by the hero load-in title and the scroll-triggered section headings below. */
+  function splitIntoLines(el) {
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words.map(w => `<span class="line-word">${w}</span>`).join(' ');
+    const wordEls = [...el.querySelectorAll('.line-word')];
+
+    const lines = [];
+    let currentTop = null;
+    let currentWords = [];
+    wordEls.forEach(w => {
+      const top = w.offsetTop;
+      if (currentTop === null || Math.abs(top - currentTop) < 2) {
+        currentWords.push(w.textContent);
+      } else {
+        lines.push(currentWords);
+        currentWords = [w.textContent];
+      }
+      currentTop = top;
+    });
+    if (currentWords.length) lines.push(currentWords);
+
+    el.innerHTML = lines
+      .map(lineWords => `<span class="blur-line">${lineWords.join(' ')}</span>`)
+      .join('');
+    return el.querySelectorAll('.blur-line');
+  }
+
+  /* Must wait for the Inter webfont to finish loading before measuring offsetTop — splitting
+     against fallback-font metrics grouped words onto the wrong lines (each word landed in its
+     own group), and since .blur-line is display:block that wrong split became a permanent
+     visual line break regardless of how the text later reflowed. */
+  const fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+
   /* ---------- Load-in: header + hero ---------- */
-  gsap.timeline({ defaults: { ease: 'power3.out' } })
-    .fromTo('.header', { opacity: 0, y: -24 }, { opacity: 1, y: 0, duration: 0.6 }, 0)
-    .fromTo('.hero-title', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7 }, 0.15)
-    .fromTo('.hero-desc', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7 }, 0.28)
-    .fromTo('.hero-image-wrap', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.9 }, 0.4);
+  fontsReady.then(() => {
+    const heroTitle = document.getElementById('heroTitle');
+    const heroLines = splitIntoLines(heroTitle);
+    gsap.set(heroLines, { opacity: 0, filter: 'blur(16px)', y: 14 });
+
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .fromTo('.header', { opacity: 0, y: -24 }, { opacity: 1, y: 0, duration: 0.6 }, 0)
+      .to(heroLines, { opacity: 1, filter: 'blur(0px)', y: 0, duration: 0.9, ease: 'power2.inOut', stagger: 0.15 }, 0.15)
+      .fromTo('.hero-desc', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7 }, 0.28)
+      .fromTo('.hero-image-wrap', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.9 }, 0.4);
+  });
 
   /* ---------- Awards carousel: arrows + draggable track + custom scrollbar ----------
      Pattern follows GSAP's own Draggable/Inertia guidance: while actively dragging, movement
@@ -136,40 +177,8 @@ function initSiteAnimations() {
   });
 
   /* ---------- Section headings: blur-in reveal, staggered by LINE, once per heading on scroll ----------
-     Splits the heading's rendered text into one wrapper span per VISUAL line (grouped by matching
-     offsetTop after wrapping each word) rather than guessing line breaks — works regardless of how
-     the heading actually wraps at the current viewport width. */
-  function splitIntoLines(el) {
-    const words = el.textContent.trim().split(/\s+/);
-    el.innerHTML = words.map(w => `<span class="line-word">${w}</span>`).join(' ');
-    const wordEls = [...el.querySelectorAll('.line-word')];
-
-    const lines = [];
-    let currentTop = null;
-    let currentWords = [];
-    wordEls.forEach(w => {
-      const top = w.offsetTop;
-      if (currentTop === null || Math.abs(top - currentTop) < 2) {
-        currentWords.push(w.textContent);
-      } else {
-        lines.push(currentWords);
-        currentWords = [w.textContent];
-      }
-      currentTop = top;
-    });
-    if (currentWords.length) lines.push(currentWords);
-
-    el.innerHTML = lines
-      .map(lineWords => `<span class="blur-line">${lineWords.join(' ')}</span>`)
-      .join('');
-    return el.querySelectorAll('.blur-line');
-  }
-
-  /* Must wait for the Inter webfont to finish loading before measuring offsetTop — splitting
-     against fallback-font metrics grouped words onto the wrong lines (each word landed in its
-     own group), and since .blur-line is display:block that wrong split became a permanent
-     visual line break regardless of how the text later reflowed. */
-  const fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+     Same splitIntoLines/fontsReady as the hero title above — reveal here is scroll-triggered
+     (once per heading) instead of firing immediately on load. */
   fontsReady.then(() => {
     ['miraeTitle', 'valuesTitle', 'awardsTitle'].forEach(id => {
       const el = document.getElementById(id);
