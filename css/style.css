@@ -81,6 +81,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   white-space: nowrap;
   transition: transform .3s var(--ease-smooth), box-shadow .3s var(--ease-smooth), filter .3s var(--ease-smooth);
 }
+
+/* Flip-up text on hover — slide reveal (not a 3D rotate): current text slides up out of view
+   while an identical duplicate, waiting just below, slides up to take its place. */
+.flip-content { position: relative; display: block; overflow: hidden; }
+.flip-text {
+  display: block;
+  transform: translateY(0%);
+  transition: transform .4s var(--ease-smooth);
+}
+.flip-text-hover {
+  position: absolute;
+  left: 0;
+  bottom: -100%;
+  width: 100%;
+}
+.btn:hover .flip-text { transform: translateY(-100%); }
 .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
 .btn-dark { background: var(--color-title); color: var(--color-white); }
 .btn-gradient {

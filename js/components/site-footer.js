@@ -6,7 +6,12 @@ class SiteFooter extends HTMLElement {
           <div class="footer-cta">
             <div class="footer-cta-inner">
               <h2 class="footer-heading" id="footerHeading">Vay khoản lớn<br>Lãi thật nhỏ</h2>
-              <a href="#" class="btn btn-gradient" id="footerCta">Đăng ký ngay</a>
+              <a href="#" class="btn btn-gradient" id="footerCta">
+                <span class="flip-content">
+                  <span class="flip-text" data-flip-text>Đăng ký ngay</span>
+                  <span class="flip-text flip-text-hover" data-flip-text>Đăng ký ngay</span>
+                </span>
+              </a>
             </div>
             <div class="footer-logo-deco" id="footerLogoLottie" aria-hidden="true"></div>
           </div>

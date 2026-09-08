@@ -25,6 +25,16 @@
     if (el) el.setAttribute(attr, value);
   }
 
+  // For buttons using the flip-up text hover effect: two [data-flip-text] spans hold duplicate
+  // copies of the label, so both need updating — overwriting the button's own textContent would
+  // wipe out that structure.
+  function setFlipText(id, value) {
+    if (value == null) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.querySelectorAll('[data-flip-text]').forEach(span => { span.textContent = value; });
+  }
+
   function renderList(id, items, templateFn) {
     if (!Array.isArray(items)) return;
     const el = document.getElementById(id);
@@ -48,13 +58,13 @@
           ).join('');
         }
       }
-      setText('headerCta', header.ctaText);
+      setFlipText('headerCta', header.ctaText);
       setAttr('headerCta', 'href', header.ctaLink);
     }
 
     if (footer) {
       setHTML('footerHeading', footer.heading);
-      setText('footerCta', footer.ctaText);
+      setFlipText('footerCta', footer.ctaText);
       setAttr('footerCta', 'href', footer.ctaLink);
       setText('footerSupportLabel', footer.supportLabel);
       setText('footerSupportValue', footer.supportValue);

@@ -175,6 +175,32 @@ Chìa khóa: đổi `transform-origin` giữa 2 trạng thái — `transform-ori
 ```
 Logic: khi `:hover` được thêm, `transform-origin` đổi thành `left` ngay lập tức, rồi `scaleX` mới animate 0→1 dùng origin mới. Khi bỏ hover, origin trở về `right` ngay lập tức, rồi `scaleX` animate 1→0 dùng origin `right` (cạnh trái tiến về phía cạnh phải cố định = rút từ trái sang phải).
 
+## Flip-up text trong button lúc hover (trượt che, không phải xoay 3D)
+
+Hiệu ứng "chữ lật lên" phổ biến trong button THỰC RA thường là trượt che (`translateY` + `overflow:hidden`), không phải xoay 3D `rotateX`. 2 bản copy text xếp chồng dọc, bản dưới nằm ngay bên dưới bản trên (ẩn bởi overflow), hover thì cả 2 cùng trượt lên 1 khoảng bằng chiều cao dòng — bản trên trượt ra khỏi vùng nhìn thấy, bản dưới trượt vào đúng vị trí bản trên vừa rời đi:
+```html
+<button class="btn">
+  <span class="flip-content">
+    <span class="flip-text" data-flip-text>Đăng ký</span>
+    <span class="flip-text flip-text-hover" data-flip-text>Đăng ký</span>
+  </span>
+</button>
+```
+```css
+.flip-content { position: relative; display: block; overflow: hidden; }
+.flip-text { display: block; transform: translateY(0%); transition: transform .4s var(--ease-smooth); }
+.flip-text-hover { position: absolute; left: 0; bottom: -100%; width: 100%; }
+.btn:hover .flip-text { transform: translateY(-100%); }
+```
+Nhiều demo gốc (vd CodePen phổ biến) dùng easing kiểu `cubic-bezier(0.16,1,0.3,1)` (dứt khoát, không phải ease-in-out) — nếu muốn mượt/ease-in-out thật, đổi sang token ease-in-out dùng chung của site thay vì copy nguyên easing gốc.
+
+**⚠️ Nếu button này có content lấy từ CMS/content-loader**: đừng dùng `el.textContent = value` trên phần tử `<button>` ngoài — nó sẽ xoá mất luôn cấu trúc 2 span bên trong. Phải set text vào ĐÚNG cả 2 span `[data-flip-text]` bên trong:
+```js
+function setFlipText(id, value) {
+  document.getElementById(id)?.querySelectorAll('[data-flip-text]').forEach(span => { span.textContent = value; });
+}
+```
+
 ## Nguyên tắc chung cho hover/transition CSS
 
 - Chỉ nên animate `transform` + `opacity` (+ `background-color`/`color` nếu cần, rẻ) — tránh `width`/`height`/`top`/`left` gây reflow.
