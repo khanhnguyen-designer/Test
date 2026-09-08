@@ -13,7 +13,6 @@ class SiteFooter extends HTMLElement {
                 </span>
               </a>
             </div>
-            <div class="footer-logo-deco" id="footerLogoLottie" aria-hidden="true"></div>
           </div>
 
           <div class="footer-content">
@@ -50,6 +49,8 @@ class SiteFooter extends HTMLElement {
 
             <p class="footer-fineprint" id="footerFineprint">EVO Money là nền tảng tài chính minh bạch cho Khách hàng cá nhân do Trusting Social phát triển và sở hữu. Các khoản vay tiền mặt trên nền tảng EVO Money được cung cấp bởi Công ty Tài chính TNHH MTV Mirae Asset (Việt Nam).</p>
           </div>
+
+          <div class="footer-logo-deco" id="footerLogoLottie" aria-hidden="true"></div>
         </div>
 
         <div class="footer-bottom">

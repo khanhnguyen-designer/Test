@@ -406,6 +406,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow: hidden;
 }
 .footer-row {
+  position: relative; /* .footer-logo-deco positions against this box, not .footer-cta's — it's a sibling of .footer-cta/.footer-content so it can flow after all footer-content on mobile (see responsive rules) */
   display: flex;
   gap: 20px;
   height: 499px; /* fixed per design at the 1440 reference width — see skills/spacing-reference.md */
@@ -439,7 +440,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: absolute;
   left: -64px;
   bottom: 0;
-  width: 60%;
+  /* 60% of .footer-cta's own width, back when this lived inside .footer-cta — .footer-cta is
+     itself one of two equal flex:1 1 0 columns of .footer-row with a 20px gap between them,
+     i.e. (100% - 20px)/2, so 60% of that is 30% - 6px. Kept equivalent after moving this node
+     to be a sibling of .footer-cta so it can flow after .footer-content on mobile. */
+  width: calc(30% - 6px);
   min-width: 300px;
   max-width: 535px;
   aspect-ratio: 1920 / 1046; /* matches the Lottie composition's own canvas size */
@@ -582,13 +587,29 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .values-card { max-width: none; width: 100%; }
   .awards-head { flex-direction: row; align-items: center; }
   .footer-row { flex-direction: column; height: auto; margin-bottom: 48px; }
-  .footer-cta { padding-bottom: 260px; } /* room for the logo, now free-flowing instead of bottom-pinned to a fixed 499px row */
-  .footer-logo-deco { bottom: 0; }
+  /* Once .footer-row stacks into a column, .footer-logo-deco (last child, after .footer-cta
+     and .footer-content) reads naturally in that order — switch it out of the desktop's
+     absolute bleed-behind-the-CTA treatment into normal flow, full width, own line. */
+  .footer-logo-deco {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    margin-top: 40px;
+  }
 }
 
 @media (max-width: 560px) {
   .metrics { flex-direction: column; gap: 20px; }
   .metric { flex: none; } /* flex:1 1 140px from the desktop rule would apply to HEIGHT once this becomes a column */
   .award-card { flex: 0 0 260px; height: 280px; }
-  .footer-bottom { flex-direction: column; }
+
+  /* Keep Zalo/Email and Social as 2 side-by-side columns even at phone width, instead of the
+     desktop flex:1 1 200px basis wrapping Social onto its own row once both no longer fit. */
+  .footer-info-group { flex-wrap: nowrap; }
+  .footer-info-wrap,
+  .footer-info-group > .footer-info { flex: 1 1 0; }
+
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+  #footerTermsLink { order: -1; } /* Figma shows Terms above Copyright once stacked */
 }
