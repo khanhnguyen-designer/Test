@@ -6,6 +6,11 @@
 <title>Quản trị nội dung — EVO Money</title>
 </head>
 <body>
+<!-- Bắt buộc cho backend git-gateway: widget này nhận diện các đoạn mã trên URL
+     (invite_token, confirmation_token, recovery_token...) và hiện popup đặt/khôi phục
+     mật khẩu tương ứng — thiếu nó thì link mời/xác nhận email không có gì xử lý, chỉ
+     rơi về màn hình login thường. -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
 </body>
 </html>
