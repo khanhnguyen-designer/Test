@@ -6,36 +6,79 @@
     "imageAlt": "Khách hàng sử dụng ứng dụng EVO Money"
   },
   "miraeAsset": {
-    "title": "Về Mirae Asset",
+    "title": "Về Mirae Asset - EVO Money",
     "metrics": [
-      { "number": "Top 1", "label": "Hàn Quốc" },
-      { "number": "2011", "label": "Hoạt động tại VN" },
-      { "number": "64", "label": "Văn phòng toàn cầu" }
+      {
+        "number": "Top 1",
+        "label": "Hàn Quốc"
+      },
+      {
+        "number": "2011",
+        "label": "Hoạt động tại VN"
+      },
+      {
+        "number": "64",
+        "label": "Văn phòng toàn cầu"
+      }
     ],
     "description": "Mirae Asset là một trong những tập đoàn tài chính hàng đầu châu Á. Hoạt động tại Việt Nam từ năm 2011, Mirae Asset hướng đến việc hỗ trợ khách hàng tiếp cận nguồn vốn uy tín và minh bạch, để chủ động thực hiện các kế hoạch trong cuộc sống. Với tinh thần tận tâm và liên tục cải tiến, Mirae Asset không ngừng nâng cao chất lượng dịch vụ nhằm đáp ứng đa dạng nhu cầu tài chính của khách hàng."
   },
   "values": {
     "title": "Giá trị mang lại",
     "items": [
-      { "icon": "assets/img/icon-flexible.png", "title": "Linh hoạt", "description": "Tạo sự khác biệt với việc tối ưu toàn bộ trải nghiệm, giúp bạn tiếp cận tài chính minh bạch một cách đơn giản, dễ dàng mọi lúc mọi nơi." },
-      { "icon": "assets/img/icon-trust.png", "title": "Uy tín", "description": "Sự trung thực và minh bạch luôn được đặt lên hàng đầu, đảm bảo các thông tin quan trọng của khoản vay được thể hiện rõ ràng trước khi ra quyết định đồng hành." },
-      { "icon": "assets/img/icon-growth.png", "title": "Phát triển", "description": "Hỗ trợ nhu cầu tài chính kịp thời không chỉ mở ra cơ hội mà còn là điểm tựa giúp bạn vững vàng hơn và hướng đến phát triển bền vững." }
+      {
+        "icon": "assets/img/icon-flexible.png",
+        "title": "Linh hoạt",
+        "description": "Tạo sự khác biệt với việc tối ưu toàn bộ trải nghiệm, giúp bạn tiếp cận tài chính minh bạch một cách đơn giản, dễ dàng mọi lúc mọi nơi."
+      },
+      {
+        "icon": "assets/img/icon-trust.png",
+        "title": "Uy tín",
+        "description": "Sự trung thực và minh bạch luôn được đặt lên hàng đầu, đảm bảo các thông tin quan trọng của khoản vay được thể hiện rõ ràng trước khi ra quyết định đồng hành."
+      },
+      {
+        "icon": "assets/img/icon-growth.png",
+        "title": "Phát triển",
+        "description": "Hỗ trợ nhu cầu tài chính kịp thời không chỉ mở ra cơ hội mà còn là điểm tựa giúp bạn vững vàng hơn và hướng đến phát triển bền vững."
+      }
     ]
   },
   "awards": {
     "title": "Giải thưởng của Mirae Asset",
     "items": [
-      { "year": "2019", "image": "assets/img/award-2019.png", "description": "Công ty tài chính tiêu dùng\nĐột phá nhất Việt Nam" },
-      { "year": "2018", "image": "assets/img/award-generic.png", "description": "Công ty tài chính\nTăng trưởng tốt nhất Việt Nam" },
-      { "year": "2017", "image": "assets/img/award-generic.png", "description": "Công ty tài chính\nTăng trưởng tốt nhất Việt Nam" },
-      { "year": "2017", "image": "assets/img/award-generic.png", "description": "Công ty tài chính\nTăng trưởng tốt nhất Việt Nam" }
+      {
+        "year": "2019",
+        "image": "assets/img/award-2019.png",
+        "description": "Công ty tài chính tiêu dùng\nĐột phá nhất Việt Nam"
+      },
+      {
+        "year": "2018",
+        "image": "assets/img/award-generic.png",
+        "description": "Công ty tài chính\nTăng trưởng tốt nhất Việt Nam"
+      },
+      {
+        "year": "2017",
+        "image": "assets/img/award-generic.png",
+        "description": "Công ty tài chính\nTăng trưởng tốt nhất Việt Nam"
+      },
+      {
+        "year": "2017",
+        "image": "assets/img/award-generic.png",
+        "description": "Công ty tài chính\nTăng trưởng tốt nhất Việt Nam"
+      }
     ]
   },
   "disclaimer": {
     "text": "EVO Money không trực tiếp giải ngân và không thu bất kỳ khoản phí dịch vụ nào từ người dùng trên nền tảng. Việc xét duyệt và quyết định khoản vay thuộc về đơn vị cho vay theo quy định.",
     "links": [
-      { "label": "Chính sách bảo mật", "url": "#" },
-      { "label": "Điều khoản & điều kiện", "url": "#" }
+      {
+        "label": "Chính sách bảo mật",
+        "url": "#"
+      },
+      {
+        "label": "Điều khoản & điều kiện",
+        "url": "#"
+      }
     ]
   }
 }
