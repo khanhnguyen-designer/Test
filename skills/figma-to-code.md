@@ -86,6 +86,14 @@ Hệ quả: nếu thấy heading đầu tiên nằm ở toạ độ tuyệt đ�
 
 **Cách tránh lặp lại lỗi này**: khi đo padding-top của section ĐẦU TIÊN sau header, luôn kiểm tra xem node Header trong Figma có toạ độ `y` TRÙNG với section đó không (overlay) hay nằm PHÍA TRÊN, tách biệt (nối tiếp trong luồng) — 2 trường hợp cho công thức tính khác nhau hoàn toàn.
 
+## ⚠️ `max-width` trên CHÁU (không phải con trực tiếp) sống sót qua reset của cha khi row chuyển full-width
+
+Cha có `max-width: 533px` (khớp đúng 1 cột desktop, vd tiêu đề+nội dung nằm cạnh nhau). Ở breakpoint mobile/tablet, đã nhớ reset `.row-block > .block-content { max-width: none }` khi row chuyển thành 1 cột full-width — nhưng phần tử con CHÁU bên trong nó (vd `<p class="block-desc">`) lại có SẴN `max-width: 533px` riêng của chính nó (thường do lúc đầu style hint của công cụ đọc design gán max-width y hệt cho mọi cấp lồng nhau tại 1 điểm đo). Reset ở cấp cha không tự động lan xuống cấp cháu — cháu vẫn bị cắt ở 533px dù cha đã rộng ra hẳn (vd 676px), để lại 1 khoảng trắng vô lý bên cạnh đoạn text, dễ bị coi nhầm là "text không chịu tràn ra" dù không có lỗi console hay lỗi rõ ràng nào khác.
+
+Đã gặp lại đúng bug này 2 lần trong cùng 1 buổi ở 2 chỗ riêng biệt (`.block-desc` và `.footer-fineprint`) — cả 2 đều do `max-width` được set bằng đúng con số của 1 cột desktop, y hệt kiểu bug ở mục `flex-basis cố định chạy sai trục` bên trên nhưng xảy ra với `max-width` thay vì `flex-basis`.
+
+**Cách tránh lặp lại**: khi reset 1 container cha sang full-width ở breakpoint, phải `grep max-width` trong toàn bộ CSS xem có phần tử CHÁU nào bên trong nó cũng mang 1 con số max-width TRÙNG hoặc GẦN TRÙNG với chiều rộng cột desktop của cha hay không — nếu có, reset luôn ở đó, đừng chỉ dừng ở cấp con trực tiếp. Phân biệt với các `max-width` khác: nếu con số đó dùng để CHỦ ĐÍCH giới hạn độ rộng đọc (thường đi kèm `margin: 0 auto` để canh giữa, và không khớp với bất kỳ cột nào khác trong file) thì đó là thiết kế có chủ đích, không phải bug — không nên reset.
+
 ## Nguyên tắc: luôn lấy số đo trực tiếp từ node Figma, không áng chừng
 
 Khi build lại thấy sai lệch, đọc lại đúng node đang nghi ngờ để lấy số chính xác (width, padding-top, gap...) rồi đối chiếu bằng `getBoundingClientRect()`/`getComputedStyle()` ở trình duyệt thật — không suy đoán hoặc làm tròn số nếu chưa xác nhận lại nguồn. Nếu công cụ hỗ trợ đọc metadata dạng tọa độ tuyệt đối (x/y/width/height), ưu tiên dùng cách đó thay vì chỉ đọc class/token — tọa độ tuyệt đối lộ ra chênh lệch chính xác hơn nhiều.
