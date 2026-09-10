@@ -592,7 +592,8 @@ cta-button { display: contents; }
   flex: 1 1 480px;
   display: flex;
   flex-direction: column;
-  gap: clamp(24px, 3vw, 56px);
+  align-items: flex-start; /* without this, flex's default `stretch` was pulling the button (an inline-sized element) to the full column width */
+  gap: 24px; /* Figma: "Heading Wrap" gap, applies uniformly title<->highlights and highlights<->button */
   max-width: 646px;
   position: relative;
   z-index: 1;

@@ -170,12 +170,16 @@
             },
           });
         });
-      });
 
-      gsap.timeline({ defaults: { ease: 'power3.out' } })
-        .fromTo('.header', { opacity: 0, y: -24 }, { opacity: 1, y: 0, duration: 0.6 }, 0)
-        .fromTo('.hero-home-content', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7 }, 0.15)
-        .fromTo('.hero-home-visual', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.9 }, 0.3);
+        // Hero title: no scroll trigger (it's already above the fold on load) and no word-split
+        // (its 2 lines are already separate <span>s, one per accent color) — just blur the 2
+        // spans in directly, same easing/stagger as the scroll-revealed headings above.
+        const heroTitleLines = document.querySelectorAll('.hero-home-title span');
+        if (heroTitleLines.length) {
+          gsap.set(heroTitleLines, { opacity: 0, filter: 'blur(16px)', y: 14 });
+          gsap.to(heroTitleLines, { opacity: 1, filter: 'blur(0px)', y: 0, duration: 0.9, ease: 'power2.inOut', stagger: 0.15 });
+        }
+      });
     }
   }
 
