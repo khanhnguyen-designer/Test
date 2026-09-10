@@ -625,9 +625,10 @@ cta-button { display: contents; }
 }
 
 .hero-home-disclaimer {
+  /* Same width as the hero row above it (.content-container), per explicit request — Figma's
+     own spec has this narrower (784px) and centered, but full content-width was asked for instead. */
+  width: min(1092px, 100% - 2 * var(--section-pad-x));
   margin: clamp(32px, 5vw, 56px) auto 0;
-  max-width: 784px;
-  padding: 0 var(--section-pad-x);
   text-align: center;
   font-size: var(--fs-sm);
   color: rgba(96,101,95,0.7);
