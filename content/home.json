@@ -1,0 +1,84 @@
+{
+  "hero": {
+    "titleGreen": "Vay nhanh lãi nhẹ",
+    "titleDark": "Không lo phí ẩn",
+    "highlights": [
+      { "before": "Lãi suất tính trên dư nợ gốc ", "highlight": "15%-29%", "after": "/năm" },
+      { "before": "Số tiền vay tới ", "highlight": "70", "after": " triệu đồng" },
+      { "before": "Kỳ hạn linh hoạt tới ", "highlight": "36", "after": " tháng" },
+      { "before": "", "highlight": "KHÔNG", "after": " bảo hiểm khoản vay" }
+    ],
+    "ctaText": "Đăng ký ngay",
+    "ctaLink": "#",
+    "disclaimer": "EVO Money là nền tảng tài chính minh bạch cho Khách hàng cá nhân do Trusting Social phát triển và sở hữu. Các khoản vay tiền mặt trên nền tảng EVO Money được cung cấp bởi Công ty Tài chính TNHH MTV Mirae Asset (Việt Nam)."
+  },
+  "cvp": {
+    "eyebrow": "Vì sao nên chọn EVO Money?",
+    "titleLine1": "Minh bạch mọi khoản",
+    "titleLine2": "Đăng ký dễ dàng",
+    "items": [
+      { "icon": "assets/img/home/cvp-moneybag.svg", "bg": "#e6f8e7", "text": "Lãi suất từ 1.25%/tháng tính trên dư nợ gốc" },
+      { "icon": "assets/img/home/cvp-calendar.svg", "bg": "#deebff", "text": "Kỳ hạn linh hoạt 6-36 tháng" },
+      { "icon": "assets/img/home/cvp-document.svg", "bg": "#eee7fc", "text": "Không cần bảo hiểm khoản vay" },
+      { "icon": "assets/img/home/cvp-idcard.svg", "bg": "#fff9d7", "text": "Đăng ký 100% online với CCCD" }
+    ]
+  },
+  "calculator": {
+    "label": "Bạn muốn vay",
+    "minAmount": 5000000,
+    "maxAmount": 70000000,
+    "defaultAmount": 20000000,
+    "periodLabel": "Bạn muốn vay trong bao lâu?",
+    "periods": [6, 9, 12, 15, 18, 24, 30, 36],
+    "defaultPeriod": 24,
+    "popularPeriod": 24,
+    "annualRatePercent": 21,
+    "rateRangeText": "15% - 29% /năm",
+    "caption": "Số tiền trả hàng tháng chỉ mang tính chất minh họa, được tính theo lãi suất khoảng 21%/năm tính trên dư nợ gốc. Lãi suất thực tế phụ thuộc vào hồ sơ đăng ký của từng khách hàng và không vượt quá 29%/năm trên dư nợ gốc",
+    "disclaimer": [
+      "EVO Money là nền tảng cung cấp giải pháp hỗ trợ tài chính tiêu dùng. Các khoản vay tiền mặt trên nền tảng EVO Money được cung cấp bởi Công ty Tài chính TNHH MTV Mirae Asset (Việt Nam).",
+      "Bạn có thể đăng ký khoản vay từ 5 triệu đến 70 triệu đồng, với kỳ hạn thanh toán từ 6 đến 36 tháng. Lãi suất khoản vay từ khoảng 15% – 29%/năm trên dư nợ gốc, tùy thuộc vào hồ sơ và gói vay được phê duyệt.",
+      "Ví dụ minh họa: Với khoản vay 10.000.000đ trong 12 tháng, áp dụng mức lãi suất khoảng 21%/năm trên dư nợ gốc, số tiền thanh toán hàng tháng khoảng 1.180.948đ. Số tiền thực tế có thể thay đổi tùy theo hồ sơ khách hàng, khoản vay và điều kiện được phê duyệt.",
+      "Các điều khoản, chi phí và nghĩa vụ thanh toán sẽ được thông báo rõ ràng trước khi khách hàng xác nhận khoản vay."
+    ]
+  },
+  "trusted": {
+    "titleLine1": "Duyệt và giải ngân bởi",
+    "titleLine2": "Tài chính Mirae Asset",
+    "items": [
+      { "emoji": "🇰🇷", "text": "Tập đoàn tài chính đa quốc gia đến từ Hàn Quốc với hơn 20 năm hoạt động quốc tế" },
+      { "emoji": "🏦", "text": "Phục vụ hơn 3 triệu khách hàng Việt Nam với hơn 23.000 điểm bán" },
+      { "emoji": "🌟", "text": "Top 10 thương hiệu Uy Tín Hàng đầu Châu Á 2025" }
+    ],
+    "ctaText": "Đăng ký ngay",
+    "ctaLink": "#"
+  },
+  "guide": {
+    "titleLine1": "Chi tiêu kịp thời",
+    "titleLine2": "chỉ trong 3 BƯỚC",
+    "steps": [
+      { "title": "Tải ứng dụng EVO Money", "desc": "Cài đặt ứng dụng để bắt đầu đăng ký vay" },
+      { "title": "Đăng ký khoản vay", "desc": "Nhập thông tin, xác thực CCCD và gửi yêu cầu vay" },
+      { "title": "Nhận kết quả", "desc": "Duyệt kết quả trong 5 phút. Giải ngân trong vòng 1 ngày làm việc" }
+    ]
+  },
+  "banner": {
+    "image": "assets/img/home/banner-phone.png",
+    "subtitle": "Duyệt vay 100% online trên EVO MONEY",
+    "title": "Vay tiền dễ dàng\nKhông cần thế chấp",
+    "ctaText": "Tải ứng dụng",
+    "ctaLink": "#"
+  },
+  "faq": {
+    "title": "Trạm giải đáp thông tin",
+    "items": [
+      { "question": "Vay tiền qua EVO Money là gì?", "answer": "EVO Money là nền tảng tài chính minh bạch cho Khách hàng cá nhân do Trusting Social phát triển và sở hữu. Các khoản vay tiền mặt trên nền tảng EVO Money được cung cấp bởi Công ty Tài chính TNHH MTV Mirae Asset (Việt Nam)." },
+      { "question": "Ai có thể vay tiền mặt qua EVO Money?", "answer": "Công dân Việt Nam từ 22-60 tuổi, có CCCD hợp lệ và thu nhập ổn định hàng tháng." },
+      { "question": "Lãi suất của khoản vay qua EVO Money ?", "answer": "Lãi suất khoản vay từ khoảng 15% – 29%/năm trên dư nợ gốc, tùy thuộc vào hồ sơ và gói vay được phê duyệt." },
+      { "question": "Lãi suất tính trên dư nợ gốc và lãi suất tính trên dư nợ giảm dần là gì?", "answer": "Lãi suất trên dư nợ gốc tính trên toàn bộ số tiền vay ban đầu trong suốt kỳ hạn, trong khi lãi suất trên dư nợ giảm dần chỉ tính trên phần dư nợ còn lại sau mỗi kỳ thanh toán." },
+      { "question": "Kỳ hạn vay qua EVO Money là bao lâu", "answer": "Kỳ hạn vay linh hoạt từ 6 đến 36 tháng, tùy theo nhu cầu và khả năng thanh toán của bạn." }
+    ],
+    "ctaText": "Xem tất cả câu hỏi",
+    "ctaLink": "#"
+  }
+}

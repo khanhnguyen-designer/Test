@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVO Money — Vay nhanh lãi nhẹ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=38">
+<script src="js/components/cta-button.js?v=1"></script>
+<script src="js/components/site-header.js?v=5"></script>
+<script src="js/components/site-footer.js?v=11"></script>
+<script src="js/content-loader.js?v=10"></script>
+</head>
+<body data-page="home">
+
+<site-header active="home"></site-header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero-home">
+    <div class="content-container hero-home-row">
+      <div class="hero-home-content">
+        <h1 class="hero-home-title">
+          <span class="hero-home-title-accent" id="heroHomeTitleGreen">Vay nhanh lãi nhẹ</span>
+          <span id="heroHomeTitleDark">Không lo phí ẩn</span>
+        </h1>
+        <ul class="hero-home-highlights" id="heroHomeHighlights">
+          <li><img src="assets/img/home/check-circle.svg" alt="" width="20" height="20"><span>Lãi suất tính trên dư nợ gốc <b>15%-29%</b>/năm</span></li>
+          <li><img src="assets/img/home/check-circle.svg" alt="" width="20" height="20"><span>Số tiền vay tới <b>70</b> triệu đồng</span></li>
+          <li><img src="assets/img/home/check-circle.svg" alt="" width="20" height="20"><span>Kỳ hạn linh hoạt tới <b>36</b> tháng</span></li>
+          <li><img src="assets/img/home/check-circle.svg" alt="" width="20" height="20"><span><b>KHÔNG</b> bảo hiểm khoản vay</span></li>
+        </ul>
+        <cta-button id="heroHomeCta" variant="dark" size="lg" kind="page" href="#" label="Đăng ký ngay"></cta-button>
+      </div>
+      <img class="hero-home-visual" src="assets/img/home/hero-visual.png" alt="Khách hàng vui mừng khi vay tiền qua EVO Money" aria-hidden="true">
+    </div>
+    <p class="hero-home-disclaimer" id="heroHomeDisclaimer">EVO Money là nền tảng tài chính minh bạch cho Khách hàng cá nhân do Trusting Social phát triển và sở hữu. Các khoản vay tiền mặt trên nền tảng EVO Money được cung cấp bởi Công ty Tài chính TNHH MTV Mirae Asset (Việt Nam).</p>
+  </section>
+
+  <!-- CVP -->
+  <section class="section cvp-section">
+    <div class="content-container-narrow">
+      <div class="cvp-heading">
+        <p class="cvp-eyebrow" id="cvpEyebrow">Vì sao nên chọn EVO Money?</p>
+        <h2 class="cvp-title" id="cvpTitle">Minh bạch mọi khoản<br>Đăng ký dễ dàng</h2>
+      </div>
+      <div class="cvp-grid" id="cvpList">
+        <div class="cvp-card">
+          <div class="cvp-icon" style="background:#e6f8e7"><img src="assets/img/home/cvp-moneybag.svg" alt=""></div>
+          <p>Lãi suất từ 1.25%/tháng tính trên dư nợ gốc</p>
+        </div>
+        <div class="cvp-card">
+          <div class="cvp-icon" style="background:#deebff"><img src="assets/img/home/cvp-calendar.svg" alt=""></div>
+          <p>Kỳ hạn linh hoạt 6-36 tháng</p>
+        </div>
+        <div class="cvp-card">
+          <div class="cvp-icon" style="background:#eee7fc"><img src="assets/img/home/cvp-document.svg" alt=""></div>
+          <p>Không cần bảo hiểm khoản vay</p>
+        </div>
+        <div class="cvp-card">
+          <div class="cvp-icon" style="background:#fff9d7"><img src="assets/img/home/cvp-idcard.svg" alt=""></div>
+          <p>Đăng ký 100% online với CCCD</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="section calc-section">
+    <div class="content-container-narrow">
+      <div class="calc-amount-wrap">
+        <p class="calc-label" id="calcLabel">Bạn muốn vay</p>
+        <p class="calc-amount" id="calcAmountDisplay">20.000.000đ</p>
+      </div>
+      <div class="calc-slider-block">
+        <div class="calc-slider" id="calcSlider">
+          <div class="calc-slider-track"></div>
+          <div class="calc-slider-fill" id="calcSliderFill"></div>
+          <div class="calc-slider-thumb" id="calcSliderThumb" tabindex="0" role="slider" aria-valuemin="5000000" aria-valuemax="70000000" aria-valuenow="20000000" aria-label="Số tiền muốn vay"></div>
+        </div>
+        <div class="calc-slider-labels">
+          <span>5 tr</span>
+          <span>70 tr</span>
+        </div>
+      </div>
+
+      <div class="calc-period-block">
+        <p class="calc-period-label" id="calcPeriodLabel">Bạn muốn vay trong bao lâu?</p>
+        <div class="calc-chips" id="calcChips">
+          <button class="calc-chip" data-months="6">6 tháng</button>
+          <button class="calc-chip" data-months="9">9 tháng</button>
+          <button class="calc-chip" data-months="12">12 tháng</button>
+          <button class="calc-chip" data-months="15">15 tháng</button>
+          <button class="calc-chip" data-months="18">18 tháng</button>
+          <button class="calc-chip is-selected" data-months="24">24 tháng (Phổ biến) <span aria-hidden="true">⭐</span></button>
+          <button class="calc-chip" data-months="30">30 tháng</button>
+          <button class="calc-chip" data-months="36">36 tháng</button>
+        </div>
+
+        <div class="calc-details">
+          <div class="calc-detail-box">
+            <p>Trả mỗi tháng</p>
+            <p class="calc-detail-value" id="calcMonthlyPayment">2.430.000đ</p>
+          </div>
+          <div class="calc-detail-box">
+            <p>Lãi suất</p>
+            <p class="calc-detail-value" id="calcRateRange">15% - 29% /năm</p>
+          </div>
+        </div>
+        <p class="calc-caption" id="calcCaption">Số tiền trả hàng tháng chỉ mang tính chất minh họa, được tính theo lãi suất khoảng 21%/năm tính trên dư nợ gốc. Lãi suất thực tế phụ thuộc vào hồ sơ đăng ký của từng khách hàng và không vượt quá 29%/năm trên dư nợ gốc</p>
+      </div>
+    </div>
+
+    <div class="content-container-narrow">
+      <div class="calc-disclaimer" id="calcDisclaimer">
+        <p>EVO Money là nền tảng cung cấp giải pháp hỗ trợ tài chính tiêu dùng. Các khoản vay tiền mặt trên nền tảng EVO Money được cung cấp bởi Công ty Tài chính TNHH MTV Mirae Asset (Việt Nam).</p>
+        <p>Bạn có thể đăng ký khoản vay từ 5 triệu đến 70 triệu đồng, với kỳ hạn thanh toán từ 6 đến 36 tháng. Lãi suất khoản vay từ khoảng 15% – 29%/năm trên dư nợ gốc, tùy thuộc vào hồ sơ và gói vay được phê duyệt.</p>
+        <p>Ví dụ minh họa: Với khoản vay 10.000.000đ trong 12 tháng, áp dụng mức lãi suất khoảng 21%/năm trên dư nợ gốc, số tiền thanh toán hàng tháng khoảng 1.180.948đ. Số tiền thực tế có thể thay đổi tùy theo hồ sơ khách hàng, khoản vay và điều kiện được phê duyệt.</p>
+        <p>Các điều khoản, chi phí và nghĩa vụ thanh toán sẽ được thông báo rõ ràng trước khi khách hàng xác nhận khoản vay.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUSTED -->
+  <section class="section trusted-section">
+    <div class="content-container">
+      <h2 class="trusted-title" id="trustedTitle">Duyệt và giải ngân bởi<br>Tài chính Mirae Asset</h2>
+      <div class="trusted-grid" id="trustedList">
+        <div class="trusted-card">
+          <div class="trusted-emoji">🇰🇷</div>
+          <p>Tập đoàn tài chính đa quốc gia đến từ Hàn Quốc với hơn 20 năm hoạt động quốc tế</p>
+        </div>
+        <div class="trusted-card">
+          <div class="trusted-emoji">🏦</div>
+          <p>Phục vụ hơn 3 triệu khách hàng Việt Nam với hơn 23.000 điểm bán</p>
+        </div>
+        <div class="trusted-card">
+          <div class="trusted-emoji">🌟</div>
+          <p>Top 10 thương hiệu Uy Tín Hàng đầu Châu Á 2025</p>
+        </div>
+      </div>
+      <cta-button id="trustedCta" variant="dark" size="lg" kind="page" href="#" label="Đăng ký ngay"></cta-button>
+    </div>
+  </section>
+
+  <!-- GUIDE STEPS -->
+  <section class="section guide-section">
+    <div class="content-container guide-row">
+      <h2 class="guide-title" id="guideTitle">Chi tiêu kịp thời<br>chỉ trong 3 BƯỚC</h2>
+      <div class="guide-card">
+        <div class="guide-progress"></div>
+        <ol class="guide-steps" id="guideSteps">
+          <li class="is-active">
+            <span class="guide-point">1</span>
+            <div class="guide-step-content">
+              <p class="guide-step-title">Tải ứng dụng EVO Money</p>
+              <p class="guide-step-desc">Cài đặt ứng dụng để bắt đầu đăng ký vay</p>
+            </div>
+          </li>
+          <li>
+            <span class="guide-point">2</span>
+            <div class="guide-step-content">
+              <p class="guide-step-title">Đăng ký khoản vay</p>
+              <p class="guide-step-desc">Nhập thông tin, xác thực CCCD và gửi yêu cầu vay</p>
+            </div>
+          </li>
+          <li>
+            <span class="guide-point">3</span>
+            <div class="guide-step-content">
+              <p class="guide-step-title">Nhận kết quả</p>
+              <p class="guide-step-desc">Duyệt kết quả trong 5 phút. Giải ngân trong vòng 1 ngày làm việc</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP BANNER -->
+  <section class="banner-section">
+    <div class="content-container">
+      <div class="banner-card">
+        <div class="banner-image-wrap">
+          <img src="assets/img/home/banner-phone.png" alt="Ứng dụng EVO Money trên điện thoại">
+        </div>
+        <div class="banner-content">
+          <p class="banner-subtitle" id="bannerSubtitle">Duyệt vay 100% online trên EVO MONEY</p>
+          <h2 class="banner-title" id="bannerTitle">Vay tiền dễ dàng<br>Không cần thế chấp</h2>
+          <cta-button id="bannerCta" variant="dark" size="lg" kind="page" href="#" label="Tải ứng dụng"></cta-button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section">
+    <div class="content-container-narrow">
+      <h2 class="faq-title" id="faqTitle">Trạm giải đáp thông tin</h2>
+      <div class="faq-list" id="faqList">
+        <div class="faq-item is-open">
+          <button class="faq-question">
+            <span>Vay tiền qua EVO Money là gì?</span>
+            <img class="faq-icon" src="assets/img/home/faq-add.svg" alt="">
+          </button>
+          <p class="faq-answer">EVO Money là nền tảng tài chính minh bạch cho Khách hàng cá nhân do Trusting Social phát triển và sở hữu. Các khoản vay tiền mặt trên nền tảng EVO Money được cung cấp bởi Công ty Tài chính TNHH MTV Mirae Asset (Việt Nam).</p>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Ai có thể vay tiền mặt qua EVO Money?</span>
+            <img class="faq-icon" src="assets/img/home/faq-add.svg" alt="">
+          </button>
+          <p class="faq-answer">Công dân Việt Nam từ 22-60 tuổi, có CCCD hợp lệ và thu nhập ổn định hàng tháng.</p>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Lãi suất của khoản vay qua EVO Money ?</span>
+            <img class="faq-icon" src="assets/img/home/faq-add.svg" alt="">
+          </button>
+          <p class="faq-answer">Lãi suất khoản vay từ khoảng 15% – 29%/năm trên dư nợ gốc, tùy thuộc vào hồ sơ và gói vay được phê duyệt.</p>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Lãi suất tính trên dư nợ gốc và lãi suất tính trên dư nợ giảm dần là gì?</span>
+            <img class="faq-icon" src="assets/img/home/faq-add.svg" alt="">
+          </button>
+          <p class="faq-answer">Lãi suất trên dư nợ gốc tính trên toàn bộ số tiền vay ban đầu trong suốt kỳ hạn, trong khi lãi suất trên dư nợ giảm dần chỉ tính trên phần dư nợ còn lại sau mỗi kỳ thanh toán.</p>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Kỳ hạn vay qua EVO Money là bao lâu</span>
+            <img class="faq-icon" src="assets/img/home/faq-add.svg" alt="">
+          </button>
+          <p class="faq-answer">Kỳ hạn vay linh hoạt từ 6 đến 36 tháng, tùy theo nhu cầu và khả năng thanh toán của bạn.</p>
+        </div>
+      </div>
+      <cta-button id="faqCta" variant="outline" size="lg" kind="page" href="#" label="Xem tất cả câu hỏi"></cta-button>
+    </div>
+  </section>
+
+</main>
+
+<site-footer></site-footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.13.0/lottie.min.js"></script>
+<script src="js/footer-animations.js?v=1"></script>
+<script src="js/home.js?v=3"></script>
+</body>
+</html>
