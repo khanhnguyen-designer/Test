@@ -81,21 +81,30 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   white-space: nowrap;
 }
 
-/* Flip-up text on hover — slide reveal (not a 3D rotate): current text slides up out of view
-   while an identical duplicate, waiting just below, slides up to take its place. */
-.flip-content { position: relative; display: block; overflow: hidden; }
-.flip-text {
-  display: block;
-  transform: translateY(0%);
-  transition: transform .4s var(--ease-smooth);
+/* <cta-button> (js/components/cta-button.js) renders a plain <a class="btn ...">, so it should
+   contribute no box of its own — display:contents lets the inner <a> behave exactly as if it
+   were the direct child of whatever flex/layout context the button sits in. */
+cta-button { display: contents; }
+
+/* Flip-up text on hover, staggered per character (matches seasats.com's nav hover): each
+   character slides up out of view while an identical duplicate, waiting just below, slides up
+   to take its place — but with a per-character transition-delay so the reveal runs left-to-right
+   as a wave instead of the whole label moving as one block. --char-index/--char-amt are set
+   per-span by cta-button.js. */
+.btn-label { position: relative; display: block; overflow: hidden; }
+.btn-label-original, .btn-label-copy { display: block; }
+.btn-label-copy { position: absolute; left: 0; top: 0; }
+.btn-char {
+  display: inline-block;
+  white-space: pre;
+  transition-property: transform, opacity;
+  transition-duration: calc(0.6s - var(--char-amt, 0) * 12ms);
+  transition-delay: calc(var(--char-index, 0) * 12ms);
+  transition-timing-function: cubic-bezier(.215, .61, .355, 1);
 }
-.flip-text-hover {
-  position: absolute;
-  left: 0;
-  bottom: -100%;
-  width: 100%;
-}
-.btn:hover .flip-text { transform: translateY(-100%); }
+.btn-label-copy .btn-char { transform: translateY(100%); opacity: 0; }
+.btn:hover .btn-label-copy .btn-char { transform: translateY(0); opacity: 1; }
+.btn:hover .btn-label-original .btn-char { transform: translateY(-100%); opacity: 0; }
 .btn-dark { background: var(--color-title); color: var(--color-white); }
 .btn-gradient {
   position: relative;

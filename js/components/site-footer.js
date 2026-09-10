@@ -6,12 +6,7 @@ class SiteFooter extends HTMLElement {
           <div class="footer-cta">
             <div class="footer-cta-inner">
               <h2 class="footer-heading" id="footerHeading">Vay khoản lớn<br>Lãi thật nhỏ</h2>
-              <a href="#" class="btn btn-gradient" id="footerCta">
-                <span class="flip-content">
-                  <span class="flip-text" data-flip-text>Đăng ký ngay</span>
-                  <span class="flip-text flip-text-hover" data-flip-text>Đăng ký ngay</span>
-                </span>
-              </a>
+              <cta-button id="footerCta" variant="gradient" kind="page" href="#" label="Đăng ký ngay"></cta-button>
             </div>
           </div>
 

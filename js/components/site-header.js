@@ -24,12 +24,7 @@ class SiteHeader extends HTMLElement {
           ${navHtml}
         </nav>
 
-        <a href="#" class="btn btn-dark header-cta" id="headerCta">
-          <span class="flip-content">
-            <span class="flip-text" data-flip-text>Đăng ký</span>
-            <span class="flip-text flip-text-hover" data-flip-text>Đăng ký</span>
-          </span>
-        </a>
+        <cta-button id="headerCta" class="header-cta" variant="dark" kind="page" href="#" label="Đăng ký"></cta-button>
 
         <button class="burger" id="burger" aria-label="Mở menu" aria-expanded="false">
           <span></span><span></span><span></span>
