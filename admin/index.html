@@ -4,6 +4,137 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Quản trị nội dung — EVO Money</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ---------- EVO Money theme for the Decap CMS admin UI ----------
+     Decap renders its own chrome via CSS-in-JS with hashed class names (e.g.
+     "css-83wr9v-FieldLabel"), so plain class selectors would break on the next
+     Decap version bump. Targeting [class*="ReadableName"] survives that — the
+     hash prefix changes across builds, but the semantic suffix (from the
+     component's own source) does not. Bare element selectors (input, textarea,
+     button) are the most durable layer and are preferred wherever Decap's own
+     wrapper class carries no semantic suffix to hook into. */
+  :root {
+    --evo-primary: #059937;
+    --evo-primary-light: #52be64;
+    --evo-title: #1d211c;
+    --evo-body: #60655f;
+    --evo-border: #e7e9e7;
+    --evo-line: #d7dad7;
+    --evo-card-bg: #eff1ef;
+    --evo-white: #fcfdfc;
+  }
+
+  body, input, textarea, select, button {
+    font-family: 'Inter', -apple-system, 'system-ui', sans-serif !important;
+  }
+
+  /* Login screen */
+  [class*="StyledAuthenticationPage"] {
+    background: var(--evo-white) !important;
+  }
+  [class*="StyledAuthenticationPage"] button {
+    background: var(--evo-primary) !important;
+    border-radius: 999px !important;
+    border: none !important;
+    font-weight: 600 !important;
+  }
+  [class*="StyledAuthenticationPage"] button:hover {
+    background: var(--evo-primary-light) !important;
+  }
+
+  /* Top toolbar */
+  [class*="ToolbarContainer"] {
+    background: var(--evo-white) !important;
+    border-bottom: 1px solid var(--evo-border) !important;
+  }
+
+  /* Field labels */
+  [class*="FieldLabel"] {
+    color: var(--evo-title) !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  /* Text inputs, textareas, selects — Decap's own wrapper class for the plain
+     text widget carries no semantic suffix (just a hash), so the reliable hook
+     here is the bare element rather than a [class*=...] selector. */
+  input[type="text"], input[type="search"], input[type="email"], input[type="password"],
+  textarea, select,
+  [class*="TextControl"] {
+    border: 1px solid var(--evo-border) !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    font-size: 15px !important;
+    color: var(--evo-title) !important;
+    background: var(--evo-white) !important;
+    box-shadow: none !important;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  input[type="text"]:focus, input[type="search"]:focus, input[type="email"]:focus,
+  input[type="password"]:focus, textarea:focus, select:focus,
+  [class*="TextControl"]:focus {
+    border-color: var(--evo-primary) !important;
+    box-shadow: 0 0 0 3px rgba(5, 153, 55, 0.15) !important;
+    outline: none !important;
+  }
+
+  /* "Add ___" buttons on list widgets */
+  [class*="AddButton"] {
+    background: var(--evo-card-bg) !important;
+    color: var(--evo-primary) !important;
+    border: 1px dashed var(--evo-primary-light) !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+  }
+  [class*="AddButton"]:hover {
+    background: rgba(5, 153, 55, 0.08) !important;
+  }
+
+  /* List widget item rows — card look instead of a bare divider line */
+  [class*="ListItem"] {
+    border: 1px solid var(--evo-border) !important;
+    border-radius: 10px !important;
+    margin-bottom: 8px !important;
+    overflow: hidden;
+  }
+
+  /* Top nav (Contents/Media) active tab, and the sidebar's selected collection —
+     both ship literal, non-hashed class names ("header-link-active",
+     "sidebar-active"), the most durable hook available. Recolored from Decap's
+     default blue so the whole admin reads as one theme, not two. */
+  .header-link-active {
+    color: var(--evo-primary) !important;
+  }
+  .sidebar-active {
+    background: rgba(5, 153, 55, 0.08) !important;
+    color: var(--evo-primary) !important;
+  }
+
+  /* Collection search box */
+  [class*="SearchInput"] {
+    border: 1px solid var(--evo-border) !important;
+    border-radius: 8px !important;
+  }
+
+  /* Publish button — the site's own primary-button shape (pill, brand green).
+     The colored element is the inner span (acts as the button visually), not
+     a <button> ancestor — Decap renders it as a styled span with a click
+     handler, so [class*="PublishButton"] must target it directly. */
+  [class*="PublishButton"],
+  [class*="PublishedButton"] {
+    background: var(--evo-primary) !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+  }
+  [class*="PublishButton"]:hover,
+  [class*="PublishedButton"]:hover {
+    background: var(--evo-primary-light) !important;
+  }
+</style>
 </head>
 <body>
 <!-- Bắt buộc cho backend git-gateway: widget này nhận diện các đoạn mã trên URL
