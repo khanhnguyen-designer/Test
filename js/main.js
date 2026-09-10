@@ -203,24 +203,6 @@ function initSiteAnimations() {
     });
   });
 
-  /* ---------- Footer logo Lottie animation — replays every time the footer scrolls into view ---------- */
-  const footerLogoEl = document.getElementById('footerLogoLottie');
-  if (footerLogoEl && window.lottie) {
-    const footerLogoAnim = lottie.loadAnimation({
-      container: footerLogoEl,
-      renderer: 'svg',
-      loop: false,
-      autoplay: false,
-      path: 'assets/lottie/footer-logo.json',
-    });
-
-    ScrollTrigger.create({
-      trigger: '.footer',
-      start: 'top 75%',
-      onEnter: () => footerLogoAnim.goToAndPlay(0, true),
-      onEnterBack: () => footerLogoAnim.goToAndPlay(0, true),
-    });
-  }
 }
 
 (window.contentReady || Promise.resolve()).then(initSiteAnimations);

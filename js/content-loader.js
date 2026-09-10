@@ -5,6 +5,7 @@
   const CONTENT_URLS = {
     global: 'content/global.json',
     about: 'content/about.json',
+    home: 'content/home.json',
   };
 
   function setText(id, value) {
@@ -122,6 +123,89 @@
     }
   }
 
+  function applyHomeContent(data) {
+    if (!data) return;
+    const { hero, cvp, calculator, trusted, guide, banner, faq } = data;
+
+    if (hero) {
+      setText('heroHomeTitleGreen', hero.titleGreen);
+      setText('heroHomeTitleDark', hero.titleDark);
+      renderList('heroHomeHighlights', hero.highlights, h =>
+        `<li><img src="assets/img/home/check-circle.svg" alt="" width="20" height="20"><span>${h.before || ''}<b>${h.highlight}</b>${h.after || ''}</span></li>`
+      );
+      setAttr('heroHomeCta', 'label', hero.ctaText);
+      setAttr('heroHomeCta', 'href', hero.ctaLink);
+      setText('heroHomeDisclaimer', hero.disclaimer);
+    }
+
+    if (cvp) {
+      setText('cvpEyebrow', cvp.eyebrow);
+      setHTML('cvpTitle', [cvp.titleLine1, cvp.titleLine2].filter(Boolean).join('\n'));
+      renderList('cvpList', cvp.items, item =>
+        `<div class="cvp-card"><div class="cvp-icon" style="background:${item.bg}"><img src="${item.icon}" alt=""></div><p>${item.text}</p></div>`
+      );
+    }
+
+    if (calculator) {
+      setText('calcLabel', calculator.label);
+      setText('calcPeriodLabel', calculator.periodLabel);
+      setText('calcRateRange', calculator.rateRangeText);
+      setText('calcCaption', calculator.caption);
+      renderList('calcDisclaimer', calculator.disclaimer, p => `<p>${p}</p>`);
+      if (Array.isArray(calculator.periods)) {
+        renderList('calcChips', calculator.periods, months => {
+          const isPopular = months === calculator.popularPeriod;
+          const isSelected = months === calculator.defaultPeriod;
+          return `<button class="calc-chip${isSelected ? ' is-selected' : ''}" data-months="${months}">${months} tháng${isPopular ? ' (Phổ biến) <span aria-hidden="true">⭐</span>' : ''}</button>`;
+        });
+      }
+      // Calculator amounts/rate feed js/home.js's live math, not just static text — dispatch
+      // an event rather than reaching into home.js's closed-over state directly.
+      document.dispatchEvent(new CustomEvent('calculator-config', { detail: calculator }));
+    }
+
+    if (trusted) {
+      setHTML('trustedTitle', [trusted.titleLine1, trusted.titleLine2].filter(Boolean).join('\n'));
+      renderList('trustedList', trusted.items, item =>
+        `<div class="trusted-card"><div class="trusted-emoji">${item.emoji}</div><p>${item.text}</p></div>`
+      );
+      setAttr('trustedCta', 'label', trusted.ctaText);
+      setAttr('trustedCta', 'href', trusted.ctaLink);
+    }
+
+    if (guide) {
+      setHTML('guideTitle', [guide.titleLine1, guide.titleLine2].filter(Boolean).join('\n'));
+      renderList('guideSteps', guide.steps, (step, i) => `
+        <li${i === 0 ? ' class="is-active"' : ''}>
+          <span class="guide-point">${i + 1}</span>
+          <div class="guide-step-content">
+            <p class="guide-step-title">${step.title}</p>
+            <p class="guide-step-desc">${step.desc}</p>
+          </div>
+        </li>
+      `);
+    }
+
+    if (banner) {
+      setText('bannerSubtitle', banner.subtitle);
+      setHTML('bannerTitle', banner.title);
+      setAttr('bannerCta', 'label', banner.ctaText);
+      setAttr('bannerCta', 'href', banner.ctaLink);
+    }
+
+    if (faq) {
+      setText('faqTitle', faq.title);
+      renderList('faqList', faq.items, (item, i) => `
+        <div class="faq-item${i === 0 ? ' is-open' : ''}">
+          <button class="faq-question"><span>${item.question}</span><img class="faq-icon" src="assets/img/home/faq-add.svg" alt=""></button>
+          <p class="faq-answer">${item.answer}</p>
+        </div>
+      `);
+      setAttr('faqCta', 'label', faq.ctaText);
+      setAttr('faqCta', 'href', faq.ctaLink);
+    }
+  }
+
   function fetchJSON(url) {
     return fetch(url).then(res => {
       if (!res.ok) throw new Error(`${url}: ${res.status}`);
@@ -129,15 +213,41 @@
     });
   }
 
-  const loaded = Promise.all([
-    fetchJSON(CONTENT_URLS.global).then(applyGlobalContent)
-      .catch(err => console.warn('[content-loader] global.json failed, keeping fallback content:', err)),
-    fetchJSON(CONTENT_URLS.about).then(applyAboutContent)
-      .catch(err => console.warn('[content-loader] about.json failed, keeping fallback content:', err)),
-  ]);
+  // window.contentReady must be a real Promise the instant this script finishes executing —
+  // main.js/home.js read it synchronously at the bottom of <body> ("window.contentReady ||
+  // Promise.resolve()") and fall back to an already-resolved promise if it's still undefined
+  // at that point, which would skip waiting for content entirely. Since this script sits in
+  // <head> and runs before <body> (and its data-page attribute) exists, the Promise itself is
+  // created synchronously here, but the work inside it — which needs document.body — is
+  // deferred to DOMContentLoaded internally.
+  window.contentReady = new Promise(resolveContentReady => {
+    function start() {
+      // Which page-specific content file to fetch — set via <body data-page="about|home"> so
+      // this file stays generic instead of hardcoding one page's content into every fetch list.
+      const page = document.body.dataset.page;
+      const pageFetchers = {
+        about: () => fetchJSON(CONTENT_URLS.about).then(applyAboutContent)
+          .catch(err => console.warn('[content-loader] about.json failed, keeping fallback content:', err)),
+        home: () => fetchJSON(CONTENT_URLS.home).then(applyHomeContent)
+          .catch(err => console.warn('[content-loader] home.json failed, keeping fallback content:', err)),
+      };
 
-  // Safety timeout: animations must still start even if the fetch hangs or is very slow.
-  const timeout = new Promise(resolve => setTimeout(resolve, 2000));
+      const loaded = Promise.all([
+        fetchJSON(CONTENT_URLS.global).then(applyGlobalContent)
+          .catch(err => console.warn('[content-loader] global.json failed, keeping fallback content:', err)),
+        pageFetchers[page] ? pageFetchers[page]() : Promise.resolve(),
+      ]);
 
-  window.contentReady = Promise.race([loaded, timeout]);
+      // Safety timeout: animations must still start even if the fetch hangs or is very slow.
+      const timeout = new Promise(resolve => setTimeout(resolve, 2000));
+
+      Promise.race([loaded, timeout]).then(resolveContentReady);
+    }
+
+    if (document.body) {
+      start();
+    } else {
+      document.addEventListener('DOMContentLoaded', start);
+    }
+  });
 })();

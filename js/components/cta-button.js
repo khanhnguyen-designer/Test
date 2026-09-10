@@ -17,13 +17,14 @@ class CtaButton extends HTMLElement {
     if (this._anchor) return;
 
     const variant = this.getAttribute('variant') || 'dark';
+    const size = this.getAttribute('size');
     const kind = this.getAttribute('kind') || 'page';
     const href = this.getAttribute('href') || '#';
     const initialLabel = this.getAttribute('label') || this.textContent.trim();
 
     this.textContent = '';
     const a = document.createElement('a');
-    a.className = `btn btn-${variant}`;
+    a.className = `btn btn-${variant}` + (size ? ` btn-${size}` : '');
     a.href = href;
     if (kind === 'link') {
       a.target = '_blank';

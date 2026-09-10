@@ -114,3 +114,105 @@ collections:
                 fields:
                   - { label: "Tên", name: "label", widget: "string" }
                   - { label: "Link", name: "url", widget: "string" }
+
+  - name: "home"
+    label: "Trang chủ (Home)"
+    files:
+      - file: "content/home.json"
+        label: "Trang chủ"
+        name: "home"
+        fields:
+          - label: "Hero (đầu trang)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Tiêu đề dòng 1 (màu xanh)", name: "titleGreen", widget: "string" }
+              - { label: "Tiêu đề dòng 2", name: "titleDark", widget: "string" }
+              - label: "Danh sách lợi ích (dấu tick)"
+                name: "highlights"
+                widget: "list"
+                fields:
+                  - { label: "Trước", name: "before", widget: "string", required: false }
+                  - { label: "Phần in đậm màu xanh", name: "highlight", widget: "string" }
+                  - { label: "Sau", name: "after", widget: "string", required: false }
+              - { label: "Text nút", name: "ctaText", widget: "string" }
+              - { label: "Link nút", name: "ctaLink", widget: "string" }
+              - { label: "Dòng chú thích nhỏ", name: "disclaimer", widget: "text" }
+          - label: "Lý do chọn EVO Money (CVP)"
+            name: "cvp"
+            widget: "object"
+            fields:
+              - { label: "Dòng nhỏ phía trên", name: "eyebrow", widget: "string" }
+              - { label: "Tiêu đề dòng 1", name: "titleLine1", widget: "string" }
+              - { label: "Tiêu đề dòng 2", name: "titleLine2", widget: "string" }
+              - label: "Danh sách thẻ"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "string" }
+                  - { label: "Màu nền icon (mã hex)", name: "bg", widget: "string" }
+                  - { label: "Nội dung", name: "text", widget: "string" }
+          - label: "Máy tính khoản vay"
+            name: "calculator"
+            widget: "object"
+            fields:
+              - { label: "Nhãn (vd: Bạn muốn vay)", name: "label", widget: "string" }
+              - { label: "Số tiền tối thiểu (đ)", name: "minAmount", widget: "number" }
+              - { label: "Số tiền tối đa (đ)", name: "maxAmount", widget: "number" }
+              - { label: "Số tiền mặc định (đ)", name: "defaultAmount", widget: "number" }
+              - { label: "Nhãn kỳ hạn", name: "periodLabel", widget: "string" }
+              - { label: "Danh sách kỳ hạn (tháng)", name: "periods", widget: "list", field: { label: "Số tháng", name: "months", widget: "number" } }
+              - { label: "Kỳ hạn mặc định (tháng)", name: "defaultPeriod", widget: "number" }
+              - { label: "Kỳ hạn phổ biến (gắn nhãn ⭐, tháng)", name: "popularPeriod", widget: "number" }
+              - { label: "Lãi suất/năm dùng để tính (%, chỉ minh hoạ)", name: "annualRatePercent", widget: "number" }
+              - { label: "Text khoảng lãi suất hiển thị", name: "rateRangeText", widget: "string" }
+              - { label: "Ghi chú nhỏ dưới kết quả", name: "caption", widget: "text" }
+              - { label: "Đoạn disclaimer dài (mỗi dòng 1 đoạn)", name: "disclaimer", widget: "list", field: { label: "Đoạn", name: "paragraph", widget: "text" } }
+          - label: "Được tin tưởng bởi (Trusted)"
+            name: "trusted"
+            widget: "object"
+            fields:
+              - { label: "Tiêu đề dòng 1", name: "titleLine1", widget: "string" }
+              - { label: "Tiêu đề dòng 2", name: "titleLine2", widget: "string" }
+              - label: "Danh sách thẻ"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Emoji", name: "emoji", widget: "string" }
+                  - { label: "Nội dung", name: "text", widget: "text" }
+              - { label: "Text nút", name: "ctaText", widget: "string" }
+              - { label: "Link nút", name: "ctaLink", widget: "string" }
+          - label: "3 bước vay (Guide)"
+            name: "guide"
+            widget: "object"
+            fields:
+              - { label: "Tiêu đề dòng 1", name: "titleLine1", widget: "string" }
+              - { label: "Tiêu đề dòng 2", name: "titleLine2", widget: "string" }
+              - label: "Các bước"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - { label: "Tiêu đề bước", name: "title", widget: "string" }
+                  - { label: "Mô tả bước", name: "desc", widget: "string" }
+          - label: "Banner tải app"
+            name: "banner"
+            widget: "object"
+            fields:
+              - { label: "Ảnh", name: "image", widget: "image" }
+              - { label: "Dòng nhỏ phía trên", name: "subtitle", widget: "string" }
+              - { label: "Tiêu đề (xuống dòng bằng phím Enter)", name: "title", widget: "text" }
+              - { label: "Text nút", name: "ctaText", widget: "string" }
+              - { label: "Link nút", name: "ctaLink", widget: "string" }
+          - label: "Câu hỏi thường gặp (FAQ)"
+            name: "faq"
+            widget: "object"
+            fields:
+              - { label: "Tiêu đề", name: "title", widget: "string" }
+              - label: "Danh sách câu hỏi"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Câu hỏi", name: "question", widget: "string" }
+                  - { label: "Câu trả lời", name: "answer", widget: "text" }
+              - { label: "Text nút", name: "ctaText", widget: "string" }
+              - { label: "Link nút", name: "ctaLink", widget: "string" }

@@ -106,6 +106,8 @@ cta-button { display: contents; }
 .btn:hover .btn-label-copy .btn-char { transform: translateY(0); opacity: 1; }
 .btn:hover .btn-label-original .btn-char { transform: translateY(-100%); opacity: 0; }
 .btn-dark { background: var(--color-title); color: var(--color-white); }
+.btn-outline { background: transparent; color: var(--color-title); padding-left: 0; padding-right: 0; }
+.btn-lg { padding: 15px 24px; font-size: 19px; line-height: 26px; border-radius: 12px; }
 .btn-gradient {
   position: relative;
   background: linear-gradient(0deg, var(--color-primary) 75%, var(--color-primary-light));
@@ -567,6 +569,186 @@ cta-button { display: contents; }
 .footer-bottom p { margin: 0; } /* reset the browser's default <p> margin — the terms <a> next to it has none, so this was pushing copyright out of vertical alignment */
 
 
+/* ==================== Home page ==================== */
+
+/* A narrower content width alongside .content-container (1092px) — this page's CVP/Calculator/
+   FAQ sections are a single 646px-wide centered column, not a two-column row. */
+.content-container-narrow { width: min(646px, 100% - 2 * var(--section-pad-x)); margin: 0 auto; }
+
+/* ---------- Hero (home) ---------- */
+.hero-home {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(32px, 5vw, 64px) 0 clamp(40px, 6vw, 64px);
+  background: radial-gradient(120% 100% at 28% 0%, #e9f9ee 0%, #ffffff 65%);
+}
+.hero-home-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  flex-wrap: wrap;
+}
+.hero-home-content {
+  flex: 1 1 480px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 56px);
+  max-width: 646px;
+  position: relative;
+  z-index: 1;
+}
+.hero-home-title {
+  margin: 0;
+  display: block;
+  font-size: var(--fs-6xlg);
+  font-weight: 600;
+  line-height: 1.19;
+  letter-spacing: -1px;
+  color: var(--color-title);
+}
+.hero-home-title span { display: block; }
+.hero-home-title-accent { color: var(--color-primary); }
+.hero-home-highlights { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.hero-home-highlights li { display: flex; align-items: center; gap: 8px; font-size: var(--fs-base); color: var(--color-title); }
+.hero-home-highlights img { flex-shrink: 0; }
+.hero-home-highlights b { font-weight: 500; font-size: var(--fs-lg); color: var(--color-primary); }
+
+/* The whole illustration (photo card + floating money-bag/calendar/badge icons) is a single
+   flattened export from Figma (assets/img/home/hero-visual.png), not separate positioned HTML
+   elements — only the text column and its button are real markup. */
+.hero-home-visual {
+  flex: 1 1 380px;
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+}
+
+.hero-home-disclaimer {
+  margin: clamp(32px, 5vw, 56px) auto 0;
+  max-width: 784px;
+  padding: 0 var(--section-pad-x);
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: rgba(96,101,95,0.7);
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- CVP ---------- */
+.cvp-section { background: var(--color-card-bg); }
+.cvp-heading { text-align: center; display: flex; flex-direction: column; gap: 8px; margin-bottom: 56px; }
+.cvp-eyebrow { margin: 0; font-size: var(--fs-base); color: var(--color-title); }
+.cvp-title { margin: 0; font-size: var(--fs-5xlg); font-weight: 600; letter-spacing: -1px; line-height: 1.19; color: var(--color-title); }
+.cvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.cvp-card { background: var(--color-white); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 24px; box-shadow: 0 4px 12px rgba(38,38,38,0.02), 0 0 3px rgba(38,38,38,0.02); }
+.cvp-card p { margin: 0; font-size: var(--fs-lg); font-weight: 500; color: var(--color-title); }
+.cvp-icon { width: 56px; height: 56px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.cvp-icon img { width: 28px; height: 28px; }
+
+/* ---------- Calculator ---------- */
+.calc-section { display: flex; flex-direction: column; align-items: center; gap: 56px; }
+.calc-amount-wrap { text-align: center; margin-bottom: 40px; }
+.calc-label { margin: 0 0 8px; font-size: var(--fs-base); color: var(--color-body); }
+.calc-amount { margin: 0; font-size: var(--fs-5xlg); font-weight: 600; letter-spacing: -1px; color: var(--color-title); }
+
+.calc-slider-block { margin-bottom: 40px; }
+.calc-slider { position: relative; height: 26px; display: flex; align-items: center; touch-action: none; }
+.calc-slider-track { position: absolute; left: 0; right: 0; height: 8px; border-radius: 999px; background: #e6e6e6; }
+.calc-slider-fill { position: absolute; left: 0; height: 8px; border-radius: 999px; background: linear-gradient(90deg, #aae1af, var(--color-primary-light)); }
+.calc-slider-thumb {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--color-primary-light);
+  box-shadow: 0 0 0 6px rgba(82,190,100,0.2);
+  transform: translateX(-50%);
+  cursor: grab;
+}
+.calc-slider-thumb:active { cursor: grabbing; }
+.calc-slider-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: var(--fs-lg); color: var(--color-body); }
+
+.calc-period-label { margin: 0 0 24px; font-size: var(--fs-xlg); font-weight: 500; letter-spacing: -0.5px; color: var(--color-title); }
+.calc-chips { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+.calc-chip {
+  height: 46px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background: var(--color-white);
+  font-family: inherit;
+  font-size: var(--fs-base);
+  color: var(--color-title);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+.calc-chip.is-selected { background: #e6f8e7; border-color: var(--color-primary); color: var(--color-primary); }
+
+.calc-details { display: flex; gap: 16px; margin-bottom: 16px; }
+.calc-detail-box { flex: 1; background: #e6f8e7; border-radius: 16px; padding: 12px 16px; text-align: center; }
+.calc-detail-box p:first-child { margin: 0 0 4px; font-size: var(--fs-base); color: var(--color-body); }
+.calc-detail-value { margin: 0; font-size: var(--fs-xlg); font-weight: 500; letter-spacing: -0.5px; color: var(--color-title); }
+.calc-caption { margin: 0; font-size: var(--fs-base); color: var(--color-body); line-height: 1.4; }
+
+.calc-disclaimer { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 17px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.calc-disclaimer p { margin: 0; font-size: var(--fs-base); color: var(--color-body); line-height: 1.4; }
+
+/* ---------- Trusted ---------- */
+.trusted-section { background: var(--color-card-bg); }
+.trusted-section .content-container { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+.trusted-title { margin: 0; text-align: center; font-size: var(--fs-5xlg); font-weight: 600; letter-spacing: -1px; line-height: 1.19; color: var(--color-title); }
+.trusted-grid { display: flex; gap: 24px; align-self: stretch; }
+.trusted-card { flex: 1; background: var(--color-white); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 24px; }
+.trusted-card p { margin: 0; font-size: var(--fs-base); font-weight: 500; color: var(--color-body); }
+.trusted-emoji { width: 56px; height: 56px; border-radius: 999px; background: var(--color-card-bg); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+
+/* ---------- Guide steps ---------- */
+.guide-section .guide-row { display: flex; align-items: flex-start; gap: 20px; }
+.guide-title { flex: 1; margin: 0; font-size: var(--fs-5xlg); font-weight: 600; letter-spacing: -1px; line-height: 1.19; color: var(--color-title); }
+.guide-card { position: relative; flex: 1; background: var(--color-card-bg); border-radius: 20px; padding: 0 24px; overflow: hidden; }
+.guide-progress { position: absolute; left: 46px; top: 74px; width: 4px; height: 148px; background: var(--color-white); border-radius: 999px; }
+.guide-progress::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 35px; border-radius: 999px; background: linear-gradient(180deg, #aae1af, var(--color-primary-light)); }
+.guide-steps { list-style: none; margin: 0; padding: 0; }
+.guide-steps li { display: flex; align-items: center; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--color-border); }
+.guide-steps li:last-child { border-bottom: none; }
+.guide-point { flex-shrink: 0; width: 48px; height: 48px; border-radius: 999px; background: var(--color-white); color: var(--color-body); font-size: var(--fs-lg); font-weight: 500; display: flex; align-items: center; justify-content: center; }
+.guide-steps li.is-active .guide-point { background: linear-gradient(135deg, #aae1af, var(--color-primary-light)); border: 2.8px solid #aae1af; color: var(--color-white); }
+.guide-step-title { margin: 0 0 8px; font-size: var(--fs-lg); font-weight: 500; color: var(--color-title); }
+.guide-step-desc { margin: 0; font-size: var(--fs-base); color: var(--color-body); }
+
+/* ---------- App banner ---------- */
+.banner-section { padding: clamp(56px, 9vw, 124px) 0; background: linear-gradient(180deg, var(--color-primary) 0%, #ffffff 100%); }
+.banner-card { display: flex; gap: 20px; align-items: center; background: var(--color-white); border-radius: 22px; padding: 20px 40px 0; overflow: hidden; }
+.banner-image-wrap { flex: 1; min-width: 0; align-self: flex-end; }
+.banner-image-wrap img { width: 100%; display: block; }
+.banner-content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 56px; padding-bottom: 40px; }
+.banner-subtitle { margin: 0 0 8px; font-size: var(--fs-base); color: var(--color-body); }
+.banner-title { margin: 0; font-size: var(--fs-5xlg); font-weight: 600; letter-spacing: -1px; line-height: 1.19; color: var(--color-title); }
+
+/* ---------- FAQ ---------- */
+.faq-title { margin: 0 0 56px; text-align: center; font-size: var(--fs-5xlg); font-weight: 600; letter-spacing: -1px; color: var(--color-title); }
+.faq-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; }
+.faq-item { border: 1px solid var(--color-line); border-radius: 16px; padding: 24px; }
+.faq-question { display: flex; align-items: flex-start; gap: 8px; width: 100%; text-align: left; font-family: inherit; font-size: var(--fs-lg); font-weight: 500; color: var(--color-title); }
+.faq-question span { flex: 1; }
+.faq-icon { flex-shrink: 0; transition: transform .3s var(--ease-smooth); }
+.faq-item.is-open .faq-icon { transform: rotate(135deg); }
+.faq-answer {
+  margin: 0;
+  font-size: var(--fs-base);
+  color: var(--color-body);
+  line-height: 1.4;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .3s var(--ease-smooth), margin-top .3s var(--ease-smooth);
+}
+.faq-item.is-open .faq-answer { margin-top: 12px; max-height: 300px; }
+.faq-section { text-align: center; }
+
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .nav {
@@ -617,9 +799,26 @@ cta-button { display: contents; }
     max-width: none;
     margin-top: 40px;
   }
+
+  /* Home page: rows that are 2 fixed-ratio flex items side by side (title+card, image+text,
+     3 cards) become unreadably cramped once the row itself is this narrow — stack them instead,
+     same treatment as .row-block above. */
+  .guide-row { flex-direction: column; }
+  .banner-card { flex-direction: column; padding: 24px; gap: 24px; }
+  .banner-image-wrap { align-self: stretch; }
+  .banner-content { padding-bottom: 0; }
+  .trusted-grid { flex-direction: column; }
 }
 
 @media (max-width: 560px) {
+  .cvp-grid { grid-template-columns: 1fr; }
+  .hero-home-content .btn,
+  .trusted-section .btn,
+  .banner-content .btn,
+  .faq-section .btn {
+    width: 100%;
+  }
+
   .metrics { flex-direction: column; gap: 20px; }
   .metric { flex: none; } /* flex:1 1 140px from the desktop rule would apply to HEIGHT once this becomes a column */
   .award-card { flex: 0 0 260px; height: 280px; }
