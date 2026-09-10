@@ -580,7 +580,7 @@ cta-button { display: contents; }
   position: relative;
   overflow: hidden;
   padding: clamp(32px, 5vw, 64px) 0 clamp(40px, 6vw, 64px);
-  background: radial-gradient(120% 100% at 28% 0%, #e9f9ee 0%, #ffffff 65%);
+  background: #e9f9ee; /* sampled directly from the Figma render — flat, not a gradient */
 }
 .hero-home-row {
   display: flex;
